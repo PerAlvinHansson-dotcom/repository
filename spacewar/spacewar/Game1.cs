@@ -9,6 +9,7 @@ namespace spacewar
     /// </summary>
     public class Game1 : Game
     {
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -29,6 +30,36 @@ namespace spacewar
             // TODO: Add your initialization logic here
 
             base.Initialize();
+
+
+            for (int i = 0; i < length; i++)
+            {
+                for (int i = 0; i < length; i++)
+                {
+                    for (int i = 0; i < length; i++)
+                    {
+                        for (int i = 0; i < length; i++)
+                        {
+                            for (int i = 0; i < length; i++)
+                            {
+                                for (int i = 0; i < length; i++)
+                                {
+                                    for (int i = 0; i < length; i++)
+                                    {
+                                        for (int i = 0; i < length; i++)
+                                        {
+                                            for (int i = 0; i < length; i++)
+                                            {
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>
