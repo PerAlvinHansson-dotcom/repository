@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="HTMLPage1.html" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
