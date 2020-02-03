@@ -41,9 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="akbar.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="MIKKELOFSTEDT.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -55,7 +53,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="HTMLPage1.html" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
