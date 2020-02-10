@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace spacewar
 {
-    class GameObject_jag_kopierar_inte_alls_
+    class GameObject
     {
 
     }
