@@ -42,8 +42,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game1.cs" />
-    <Compile Include="GameObject%28jag kopierar inte alls%29.cs" />
-	<Compile Include="interface.cs" />
+    <Compile Include="GameObject.cs" />
+    <Compile Include="interface.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
