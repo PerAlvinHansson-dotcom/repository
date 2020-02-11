@@ -9,7 +9,7 @@ namespace spacewar
     /// </summary>
     public class Game1 : Game
     {
-
+        Player player;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -42,6 +42,7 @@ namespace spacewar
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            player = new Player(Content.Load<Texture2D>("ship"), new Vector2(10, 150));
 
             // TODO: use this.Content to load your game content here
         }
@@ -66,7 +67,7 @@ namespace spacewar
                 Exit();
 
             // TODO: Add your update logic here
-
+            player.Update();
             base.Update(gameTime);
         }
 
@@ -79,8 +80,10 @@ namespace spacewar
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-
+            spriteBatch.Begin();
+            player.Draw(spriteBatch);
             base.Draw(gameTime);
+            spriteBatch.End();
         }
     }
 }
