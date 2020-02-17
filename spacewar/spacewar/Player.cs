@@ -11,6 +11,7 @@ namespace spacewar
 {
     class Player : GameObject
     {
+        public bool harTryckt;
 
         public Player(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
         {
@@ -18,28 +19,54 @@ namespace spacewar
 
         }
 
+        void alvinssmartametod()
+        {
+            harTryckt = !harTryckt;
+        }
+
         public new void Update()
         {
-
+            if(harTryckt == false)
+            {
+                velocity.Y = 0;
+                velocity.X = 0;
+            }
+            harTryckt = false;
             position += velocity;
 
             KeyboardState state = Keyboard.GetState();
 
 
-
+            
            
 
             if (state.IsKeyDown(Keys.Down))
             {
                 velocity.Y = 3;
+                alvinssmartametod();
             }
 
             if (state.IsKeyDown(Keys.Up))
             {
                 velocity.Y = -3;
+                alvinssmartametod();
             }
 
-       
+
+            if (state.IsKeyDown(Keys.Right))
+            {
+                velocity.X = 3;
+                alvinssmartametod();
+            }
+
+            if (state.IsKeyDown(Keys.Left))
+            {
+                velocity.X = -3;
+                alvinssmartametod();
+            }
+
+
+
 
         }   
 
