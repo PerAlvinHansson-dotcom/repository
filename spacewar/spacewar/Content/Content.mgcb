@@ -13,7 +13,11 @@
 
 #---------------------------------- Content ---------------------------------#
 
+<<<<<<< HEAD
 #begin ball_1.png
+=======
+#begin ship.png
+>>>>>>> a556d4ebf11347739bad5111aea0907070594598
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -23,5 +27,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
 /build:ball_1.png
+=======
+/build:ship.png
+>>>>>>> a556d4ebf11347739bad5111aea0907070594598
 
