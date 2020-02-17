@@ -44,9 +44,11 @@ namespace spacewar
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin();
 
             spriteBatch.Draw(texture, position, Color.White);
 
+            spriteBatch.End();
         }
     }
 }
