@@ -12,7 +12,7 @@ namespace spacewar
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -42,6 +42,7 @@ namespace spacewar
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            
 
             // TODO: use this.Content to load your game content here
         }
