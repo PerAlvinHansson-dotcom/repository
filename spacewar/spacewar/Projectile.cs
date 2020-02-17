@@ -7,6 +7,8 @@ public class Projectile : GameObject
         
 	}
 
+    List<Projectile> projectiles;
+
     public void Update()
     {
 
