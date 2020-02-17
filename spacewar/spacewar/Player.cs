@@ -36,10 +36,6 @@ namespace spacewar
 
             KeyboardState state = Keyboard.GetState();
 
-
-            
-           
-
             if (state.IsKeyDown(Keys.Down))
             {
                 velocity.Y = 3;
