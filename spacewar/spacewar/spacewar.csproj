@@ -44,7 +44,11 @@
     <Compile Include="Game1.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="interface.cs" />
+<<<<<<< HEAD
     <Compile Include="Powerup.cs" />
+=======
+    <Compile Include="Player.cs" />
+>>>>>>> a556d4ebf11347739bad5111aea0907070594598
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
