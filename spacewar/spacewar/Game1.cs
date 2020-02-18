@@ -11,11 +11,12 @@ namespace spacewar
     public class Game1 : Game
     {
         Player player;
+        Interface printText;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         List<Powerup> powerups;
-
+        Interface interface1;
         Texture2D powerupTexture;
 
         public Game1()
@@ -53,6 +54,7 @@ namespace spacewar
             powerups = new List<Powerup>();
 
             powerupTexture = Content.Load<Texture2D>("ball_1");
+            printText = new Interface(Content.Load<SpriteFont>("sCORE:"));
         }
 
         /// <summary>
@@ -109,6 +111,7 @@ namespace spacewar
             }
             player.Draw(spriteBatch);
             base.Draw(gameTime);
+            printText.Print("tEST", spriteBatch, 2, 2);
             spriteBatch.End();
         }
     }

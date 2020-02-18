@@ -9,9 +9,8 @@ using Microsoft.Xna.Framework.Input;
 
 
 
-
-namespace spacewar {
-
+namespace spacewar
+{
     class Projectile : GameObject
     {
         public Projectile(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
@@ -19,9 +18,11 @@ namespace spacewar {
 
         }
 
-        List<Projectile> projectiles;
+        
 
+        public void Update()
+        {
 
+        }
     }
-
 }

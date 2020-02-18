@@ -12,12 +12,14 @@ namespace spacewar
     class Player : GameObject
     {
         public bool harTryckt;
+        List<Projectile> projectiles;
+
 
         //var rotationorigin = new Vector2(texture.Width / 2f, texture.Height / 2f);
 
         public Player(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
         {
-
+            projectiles = new List<Projectile>();
 
         }
 
@@ -72,7 +74,10 @@ namespace spacewar
                 alvinssmartametod();
             }
 
-
+            if (state.IsKeyDown(Keys.Space))
+            {
+                
+            }
 
 
         }   
