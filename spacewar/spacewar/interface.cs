@@ -12,13 +12,16 @@ namespace spacewar
     class Interface
     {
         private SpriteFont font;
-        private int score = 10;
 
-            
-            public Interface (ContentManager Content)
-	{
-                font = Content.Load<SpriteFont>("Score");
-	}
+        public Interface(SpriteFont font)
+        {
+            this.font = font;
+        }
 
+        public void Print(string text, SpriteBatch spritebatch, int X, int Y)
+        {
+            spritebatch.DrawString(font, text, new Vector2(X, Y), Color.White);
+        }
+        
     }
 }
