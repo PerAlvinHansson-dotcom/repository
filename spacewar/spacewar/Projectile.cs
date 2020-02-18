@@ -1,14 +1,8 @@
 ﻿using System;
 
-public class Projectile : GameObject
+public class Class1
 {
-	public Projectile(Texture2D texture, Vector2 startPosition) : base (texture, startPosition)
+	public Class1()
 	{
-        
 	}
-
-    public void Update()
-    {
-
-    }
 }

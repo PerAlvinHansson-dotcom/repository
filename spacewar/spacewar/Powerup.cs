@@ -15,5 +15,10 @@ namespace spacewar
         {
             velocity = new Vector2(-4, 0);
         }
+
+        public void SpeedUp()
+        {
+
+        }
     }
 }
