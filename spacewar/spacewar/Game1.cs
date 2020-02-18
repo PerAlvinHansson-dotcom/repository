@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace spacewar
 {
@@ -9,10 +10,10 @@ namespace spacewar
     /// </summary>
     public class Game1 : Game
     {
-
+        Player player;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -42,9 +43,11 @@ namespace spacewar
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
 
             // TODO: use this.Content to load your game content here
+            powerups = new List<Powerup>();
+
+            powerupTexture = Content.Load<Texture2D>("ball_1");
         }
 
         /// <summary>
@@ -68,6 +71,17 @@ namespace spacewar
 
             // TODO: Add your update logic here
 
+            for (int i = 0; i < 5; i++)
+            {
+                powerups.Add(new Powerup(powerupTexture, new Vector2(0, 0)));
+            }
+
+            foreach (Powerup power in powerups)
+            {
+                power.Update();
+            }
+
+            player.Update();
             base.Update(gameTime);
         }
 
@@ -81,7 +95,15 @@ namespace spacewar
 
             // TODO: Add your drawing code here
 
+            foreach (Powerup power in powerups)
+            {
+                power.Draw(spriteBatch);
+            }
+            
+            spriteBatch.Begin();
+            player.Draw(spriteBatch);
             base.Draw(gameTime);
+            spriteBatch.End();
         }
     }
 }
