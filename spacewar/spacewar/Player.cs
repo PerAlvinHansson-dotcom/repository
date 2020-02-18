@@ -13,6 +13,8 @@ namespace spacewar
     {
         public bool harTryckt;
 
+        //var rotationorigin = new Vector2(texture.Width / 2f, texture.Height / 2f);
+
         public Player(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
         {
 
@@ -23,6 +25,8 @@ namespace spacewar
         {
             harTryckt = !harTryckt;
         }
+
+    
 
         public new void Update()
         {
@@ -36,28 +40,35 @@ namespace spacewar
 
             KeyboardState state = Keyboard.GetState();
 
+            /*if (state.IsKeyDown(Keys.Down) & state.IsKeyDown(Keys.Right))
+            {
+                velocity.Y = 6;
+                velocity.X = 6;
+                alvinssmartametod();
+            }*/
+     
+
             if (state.IsKeyDown(Keys.Down))
             {
-                velocity.Y = 3;
+                velocity.Y = 6;
                 alvinssmartametod();
             }
 
             if (state.IsKeyDown(Keys.Up))
             {
-                velocity.Y = -3;
+                velocity.Y = -6;
                 alvinssmartametod();
             }
 
-
             if (state.IsKeyDown(Keys.Right))
             {
-                velocity.X = 3;
+                velocity.X = 6;
                 alvinssmartametod();
             }
 
             if (state.IsKeyDown(Keys.Left))
             {
-                velocity.X = -3;
+                velocity.X = -6;
                 alvinssmartametod();
             }
 
