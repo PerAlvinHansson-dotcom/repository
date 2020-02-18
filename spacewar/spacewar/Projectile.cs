@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+
+
 
 namespace spacewar
 {
-    class Projectile : GameObject
+    public class Projectile : GameObject
     {
         public Projectile(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
         {
