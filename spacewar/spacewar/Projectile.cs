@@ -7,17 +7,21 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-class Projectile : GameObject
-{
-	public Projectile(Texture2D texture, Vector2 startPosition) : base (texture, startPosition)
-	{
-        
-	}
 
-    List<Projectile> projectiles;
 
-    public void Update()
+
+namespace spacewar {
+
+    class Projectile : GameObject
     {
+        public Projectile(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
+        {
+
+        }
+
+        List<Projectile> projectiles;
+
 
     }
+
 }

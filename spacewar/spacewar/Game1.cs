@@ -100,12 +100,13 @@ namespace spacewar
 
             // TODO: Add your drawing code here
 
+     
+            
+            spriteBatch.Begin();
             foreach (Powerup power in powerups)
             {
                 power.Draw(spriteBatch);
             }
-            
-            spriteBatch.Begin();
             player.Draw(spriteBatch);
             base.Draw(gameTime);
             spriteBatch.End();
