@@ -14,6 +14,10 @@ namespace spacewar
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        List<Powerup> powerups;
+
+        Texture2D powerupTexture;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -43,6 +47,7 @@ namespace spacewar
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            player = new Player(Content.Load<Texture2D>("ship"), new Vector2(10, 150));
 
             // TODO: use this.Content to load your game content here
             powerups = new List<Powerup>();
