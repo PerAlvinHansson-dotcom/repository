@@ -12,10 +12,12 @@ namespace spacewar
     class Player : GameObject
     {
         public bool harTryckt;
+        List<Projectile> projectiles;
+
 
         public Player(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
         {
-
+            projectiles = new List<Projectile>();
 
         }
 
@@ -61,7 +63,10 @@ namespace spacewar
                 alvinssmartametod();
             }
 
-
+            if (state.IsKeyDown(Keys.Space))
+            {
+                
+            }
 
 
         }   
