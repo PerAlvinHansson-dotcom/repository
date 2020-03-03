@@ -76,9 +76,13 @@ namespace spacewar
 
             if (state.IsKeyDown(Keys.Space))
             {
-                
+                projectiles.Add(new Projectile(texture, position));
             }
 
+            foreach (Projectile projectile in projectiles)
+            {
+                projectile.Update();
+            }
 
         }   
 
