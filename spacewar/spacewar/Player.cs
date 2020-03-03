@@ -13,6 +13,9 @@ namespace spacewar
     {
         public bool harTryckt;
         List<Projectile> projectiles;
+        float angle;
+        Vector2 origin;
+        
 
 
         //var rotationorigin = new Vector2(texture.Width / 2f, texture.Height / 2f);
@@ -20,8 +23,10 @@ namespace spacewar
         public Player(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
         {
             projectiles = new List<Projectile>();
+            origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
 
         }
+
 
         void alvinssmartametod()
         {
@@ -49,20 +54,14 @@ namespace spacewar
                 alvinssmartametod();
             }*/
      
-
+            
             if (state.IsKeyDown(Keys.Down))
             {
-                velocity.Y = 6;
+                velocity.X = -6;
                 alvinssmartametod();
             }
 
             if (state.IsKeyDown(Keys.Up))
-            {
-                velocity.Y = -6;
-                alvinssmartametod();
-            }
-
-            if (state.IsKeyDown(Keys.Right))
             {
                 velocity.X = 6;
                 alvinssmartametod();
@@ -70,17 +69,25 @@ namespace spacewar
 
             if (state.IsKeyDown(Keys.Left))
             {
-                velocity.X = -6;
+                angle -= 0.07f;
                 alvinssmartametod();
             }
 
-            if (state.IsKeyDown(Keys.Space))
+
+            if (state.IsKeyDown(Keys.Right))
             {
-                
+                angle += 0.07f;
+                alvinssmartametod();
             }
 
 
-        }   
+
+        }
+
+        public new void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, position, null, Color.White, angle, origin, 1, SpriteEffects.None, 1);
+        }
 
 
 
