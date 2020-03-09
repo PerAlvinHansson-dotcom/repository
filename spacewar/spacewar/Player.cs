@@ -17,6 +17,7 @@ namespace spacewar
 
 
 
+
         //var rotationorigin = new Vector2(texture.Width / 2f, texture.Height / 2f);
 
         public Player(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
