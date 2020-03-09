@@ -12,6 +12,7 @@ namespace spacewar
     class Player : GameObject
     {
         public bool harTryckt;
+        public float speed, health;
         List<Projectile> projectiles;
 
 
