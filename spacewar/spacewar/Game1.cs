@@ -19,6 +19,8 @@ namespace spacewar
         //Interface interface1;
         Texture2D powerupTexture;
 
+        Texture2D projectileTexture1;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -55,6 +57,8 @@ namespace spacewar
 
             powerupTexture = Content.Load<Texture2D>("ball_1");
             //printText = new Interface(Content.Load<SpriteFont>("sCORE:"));
+
+            projectileTexture1 = Content.Load<Texture2D>("projectile_1");
         }
 
         /// <summary>
