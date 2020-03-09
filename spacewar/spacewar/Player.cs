@@ -14,7 +14,9 @@ namespace spacewar
         public bool harTryckt;
         public int speed = 6;
         List<Projectile> projectiles;
-
+        float angle;
+        Vector2 origin;
+        
 
 
         //var rotationorigin = new Vector2(texture.Width / 2f, texture.Height / 2f);
@@ -22,6 +24,7 @@ namespace spacewar
         public Player(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
         {
             projectiles = new List<Projectile>();
+            origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
 
         }
 
@@ -57,7 +60,7 @@ namespace spacewar
             
             if (state.IsKeyDown(Keys.Down))
             {
-                velocity.Y = 6;
+                velocity.X = -speed;
                 alvinssmartametod();
             }
 
