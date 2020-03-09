@@ -2,31 +2,24 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+
 namespace spacewar
-{ 
-
-    enum GameStates {
-         Menu,
-         Game,
-         Gameover
-    }
-
-
+{
+    /// <summary>
+    /// This is the main type for your game.
+    /// </summary>
     public class Game1 : Game
     {
         Player player;
+        //Interface printText;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+
         List<Powerup> powerups;
-        Interface interface1;
+        //Interface interface1;
         Texture2D powerupTexture;
 
-
-        GameStates State = GameStates.Menu;
-
-
-
+        Texture2D projectileTexture1;
 
         public Game1()
         {
@@ -63,7 +56,9 @@ namespace spacewar
             powerups = new List<Powerup>();
 
             powerupTexture = Content.Load<Texture2D>("ball_1");
-            interface1 = new Interface(Content.Load<SpriteFont>("myFont"));
+            //printText = new Interface(Content.Load<SpriteFont>("sCORE:"));
+
+            projectileTexture1 = Content.Load<Texture2D>("projectile_1");
         }
 
         /// <summary>
@@ -120,8 +115,7 @@ namespace spacewar
             }
             player.Draw(spriteBatch);
             base.Draw(gameTime);
-            interface1.Print("SCORE:" , spriteBatch, 15, 15);
-            interface1.Print("HP:", spriteBatch, 15, 45);
+            //printText.Print("tEST", spriteBatch, 2, 2);
             spriteBatch.End();
         }
     }
