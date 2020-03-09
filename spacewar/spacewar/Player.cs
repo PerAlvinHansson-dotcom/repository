@@ -12,6 +12,7 @@ namespace spacewar
     class Player : GameObject
     {
         public bool harTryckt;
+        public int speed = 6;
         List<Projectile> projectiles;
         float angle;
         Vector2 origin;
@@ -53,17 +54,19 @@ namespace spacewar
                 velocity.X = 6;
                 alvinssmartametod();
             }*/
+
+
      
             
             if (state.IsKeyDown(Keys.Down))
             {
-                velocity.X = -6;
+                velocity.X = -speed;
                 alvinssmartametod();
             }
 
             if (state.IsKeyDown(Keys.Up))
             {
-                velocity.X = 6;
+                velocity.X = speed;
                 alvinssmartametod();
             }
 
