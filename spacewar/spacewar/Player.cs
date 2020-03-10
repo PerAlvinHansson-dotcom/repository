@@ -6,16 +6,22 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Threading;
 
 namespace spacewar
 {
     class Player : GameObject
     {
+
+        KeyboardState oldstate;
+        KeyboardState newstate;
+
         public bool harTryckt;
-        public int speed = 6;
+        public int speed = 5;
         List<Projectile> projectiles;
         float angle;
         Vector2 origin;
+        bool nextGenExperience = false;
         
 
 
@@ -39,7 +45,8 @@ namespace spacewar
 
         public new void Update()
         {
-            if(harTryckt == false)
+            newstate = Keyboard.GetState();
+            if (harTryckt == false)
             {
                 velocity.Y = 0;
                 velocity.X = 0;
@@ -49,58 +56,54 @@ namespace spacewar
 
             KeyboardState state = Keyboard.GetState();
 
-            /*if (state.IsKeyDown(Keys.Down) & state.IsKeyDown(Keys.Right))
+
+            if (nextGenExperience == true)
             {
-                velocity.Y = 6;
-                velocity.X = 6;
-                alvinssmartametod();
-            }*/
+                Thread.Sleep(30);
+            }
+
+            if (newstate.IsKeyDown(Keys.L) && oldstate.IsKeyUp(Keys.L))
+            {
+                nextGenExperience = !nextGenExperience;
+            }
 
 
-     
-            
+
             if (state.IsKeyDown(Keys.Down))
             {
-                double rotationshastighetX = Math.Cos((double)angle); //Konverterar till double och hittar cos för vinkeln
-                double rotationshastighetY = Math.Sin((double)angle); //Konverterar till double och hittar sin för vinkeln
-                float hastighetplusX = -(float)rotationshastighetX; //Konverterar till float för att det ska kunna tillämpas på velocity
-                float hastighetplusY = -(float)rotationshastighetY;
-                velocity.X = hastighetplusX * 3;
-                velocity.Y = hastighetplusY * 3;
+                float rotationshastighetX = -(float)Math.Cos((double)angle); //Konverterar till double och hittar cos för vinkeln, konvertar sedan till float för att det ska kunna tillämpas på velocity
+                float rotationshastighetY = -(float)Math.Sin((double)angle); 
+                velocity.X = rotationshastighetX * speed;
+                velocity.Y = rotationshastighetY * speed;
                 alvinssmartametod();
             }
 
             if (state.IsKeyDown(Keys.Up))
             {
-                double rotationshastighetX = Math.Cos((double)angle); 
-                double rotationshastighetY = Math.Sin((double)angle); 
-                float hastighetplusX = (float)rotationshastighetX; 
-                float hastighetplusY = (float)rotationshastighetY; 
-                velocity.X = hastighetplusX * 3;
-                velocity.Y = hastighetplusY * 3;
+                float rotationshastighetX = (float)Math.Cos((double)angle);
+                float rotationshastighetY = (float)Math.Sin((double)angle);
+                velocity.X = rotationshastighetX * speed;
+                velocity.Y = rotationshastighetY * speed;
                 alvinssmartametod();
             }
 
             if ((state.IsKeyDown(Keys.Up) && (state.IsKeyDown(Keys.Left))))
             {
-                double rotationshastighetX = Math.Cos((double)angle);
-                double rotationshastighetY = Math.Sin((double)angle);
-                float hastighetplusX = (float)rotationshastighetX;
-                float hastighetplusY = (float)rotationshastighetY;
-                velocity.X = hastighetplusX * 5;
-                velocity.Y = hastighetplusY * 5;
+                float rotationshastighetX = (float)Math.Cos((double)angle);
+                float rotationshastighetY = (float)Math.Sin((double)angle);
+                velocity.X = rotationshastighetX * speed;
+                velocity.Y = rotationshastighetY * speed;
                 angle -= 0.02f;
                 alvinssmartametod();
             }
 
             if ((state.IsKeyDown(Keys.Up) && (state.IsKeyDown(Keys.Right))))
             {
-                double rotationshastighetX = Math.Cos((double)angle);
-                double rotationshastighetY = Math.Sin((double)angle);
-                float hastighetplusX = (float)rotationshastighetX;
-                float hastighetplusY = (float)rotationshastighetY;
-                velocity.X = hastighetplusX * 5;
-                velocity.Y = hastighetplusY * 5;
+
+                float rotationshastighetX = (float)Math.Cos((double)angle); 
+                float rotationshastighetY = (float)Math.Sin((double)angle);
+                velocity.X = rotationshastighetX * speed;
+                velocity.Y = rotationshastighetY * speed;
                 angle += 0.02f;
                 alvinssmartametod();
             }
@@ -128,7 +131,7 @@ namespace spacewar
                 projectile.Update();
             }
 
-
+            oldstate = newstate;
 
         }
 
