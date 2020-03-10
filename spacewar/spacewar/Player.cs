@@ -61,13 +61,47 @@ namespace spacewar
             
             if (state.IsKeyDown(Keys.Down))
             {
-                velocity.X = -speed;
+                double rotationshastighetX = Math.Cos((double)angle); //Konverterar till double och hittar cos för vinkeln
+                double rotationshastighetY = Math.Sin((double)angle); //Konverterar till double och hittar sin för vinkeln
+                float hastighetplusX = -(float)rotationshastighetX; //Konverterar till float för att det ska kunna tillämpas på velocity
+                float hastighetplusY = -(float)rotationshastighetY;
+                velocity.X = hastighetplusX * 3;
+                velocity.Y = hastighetplusY * 3;
                 alvinssmartametod();
             }
 
             if (state.IsKeyDown(Keys.Up))
             {
-                velocity.X = speed;
+                double rotationshastighetX = Math.Cos((double)angle); 
+                double rotationshastighetY = Math.Sin((double)angle); 
+                float hastighetplusX = (float)rotationshastighetX; 
+                float hastighetplusY = (float)rotationshastighetY; 
+                velocity.X = hastighetplusX * 3;
+                velocity.Y = hastighetplusY * 3;
+                alvinssmartametod();
+            }
+
+            if ((state.IsKeyDown(Keys.Up) && (state.IsKeyDown(Keys.Left))))
+            {
+                double rotationshastighetX = Math.Cos((double)angle);
+                double rotationshastighetY = Math.Sin((double)angle);
+                float hastighetplusX = (float)rotationshastighetX;
+                float hastighetplusY = (float)rotationshastighetY;
+                velocity.X = hastighetplusX * 5;
+                velocity.Y = hastighetplusY * 5;
+                angle -= 0.02f;
+                alvinssmartametod();
+            }
+
+            if ((state.IsKeyDown(Keys.Up) && (state.IsKeyDown(Keys.Right))))
+            {
+                double rotationshastighetX = Math.Cos((double)angle);
+                double rotationshastighetY = Math.Sin((double)angle);
+                float hastighetplusX = (float)rotationshastighetX;
+                float hastighetplusY = (float)rotationshastighetY;
+                velocity.X = hastighetplusX * 5;
+                velocity.Y = hastighetplusY * 5;
+                angle += 0.02f;
                 alvinssmartametod();
             }
 
