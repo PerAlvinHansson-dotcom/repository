@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace spacewar
@@ -20,13 +17,13 @@ namespace spacewar
         public int speed = 5;
         List<Projectile> projectiles;
         float angle;
+        float angleChange = 0.07f;
         Vector2 origin;
         bool nextGenExperience = false;
         
 
 
 
-        //var rotationorigin = new Vector2(texture.Width / 2f, texture.Height / 2f);
 
         public Player(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
         {
@@ -93,7 +90,7 @@ namespace spacewar
                 float rotationshastighetY = (float)Math.Sin((double)angle);
                 velocity.X = rotationshastighetX * speed;
                 velocity.Y = rotationshastighetY * speed;
-                angle -= 0.02f;
+                angle -= angleChange;
                 alvinssmartametod();
             }
 
@@ -104,20 +101,20 @@ namespace spacewar
                 float rotationshastighetY = (float)Math.Sin((double)angle);
                 velocity.X = rotationshastighetX * speed;
                 velocity.Y = rotationshastighetY * speed;
-                angle += 0.02f;
+                angle += angleChange;
                 alvinssmartametod();
             }
 
             if (state.IsKeyDown(Keys.Left))
             {
-                angle -= 0.07f;
+                angle -= angleChange;
                 alvinssmartametod();
             }
 
 
             if (state.IsKeyDown(Keys.Right))
             {
-                angle += 0.07f;
+                angle += angleChange;
                 alvinssmartametod();
             }
 
