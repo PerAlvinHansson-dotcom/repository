@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace spacewar
@@ -10,13 +11,18 @@ namespace spacewar
     /// </summary>
     public class Game1 : Game
     {
-
+        Player player;
+        //Interface printText;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        //Interface interface1;
         List<Powerup> powerups;
+        List<Texture2D> powerupTexture;
+        int powerupTimer = 5000;
+        Random rng = new Random();
 
-        Texture2D powerupTexture;
+        Texture2D projectileTexture1;
 
         public Game1()
         {
@@ -47,11 +53,18 @@ namespace spacewar
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            player = new Player(Content.Load<Texture2D>("ship"), new Vector2(10, 150));
 
             // TODO: use this.Content to load your game content here
             powerups = new List<Powerup>();
 
-            powerupTexture = Content.Load<Texture2D>("ball_1");
+            powerupTexture = new List<Texture2D>();
+
+            powerupTexture.Add(Content.Load<Texture2D>("ball_1"));
+            powerupTexture.Add(Content.Load<Texture2D>("ball_2"));
+            //printText = new Interface(Content.Load<SpriteFont>("sCORE:"));
+
+            projectileTexture1 = Content.Load<Texture2D>("projectile_1");
         }
 
         /// <summary>
@@ -68,9 +81,6 @@ namespace spacewar
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-
-        int powerupSpawnTime = 5000;
-
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -78,18 +88,29 @@ namespace spacewar
 
             // TODO: Add your update logic here
 
-            if (powerupSpawnTime <= 0)
+            int i = 0;
+
+            if (powerupTimer <= 0)
             {
-                powerups.Add(new Powerup(powerupTexture, new Vector2(0, 0)));
+                i = rng.Next(0, 2);
+                powerups.Add(new Powerup(powerupTexture[i], new Vector2(0, 0)));
+                powerupTimer = 1000;
             }
 
-            foreach (Powerup power in powerups)
+            foreach (Powerup power in powerups.ToArray())
             {
                 power.Update();
+
+                if (player.Intersects(power.Hitbox))
+                {
+                    player.PowerUp(i);
+                    powerups.Remove(power);
+                }
             }
 
-            powerupSpawnTime -= gameTime.ElapsedGameTime.Milliseconds;
+            player.Update();
 
+            powerupTimer -= gameTime.ElapsedGameTime.Milliseconds;
             base.Update(gameTime);
         }
 
@@ -103,12 +124,17 @@ namespace spacewar
 
             // TODO: Add your drawing code here
 
+     
+            
+            spriteBatch.Begin();
             foreach (Powerup power in powerups)
             {
                 power.Draw(spriteBatch);
             }
-
+            player.Draw(spriteBatch);
             base.Draw(gameTime);
+            //printText.Print("tEST", spriteBatch, 2, 2);
+            spriteBatch.End();
         }
     }
 }

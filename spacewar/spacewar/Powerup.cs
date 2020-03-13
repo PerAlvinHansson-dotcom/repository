@@ -13,12 +13,7 @@ namespace spacewar
         //Konstruktor
         public Powerup(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
         {
-            velocity = new Vector2(-4, 0);
-        }
-
-        public void SpeedUp()
-        {
-
+            velocity = new Vector2(2, 0);
         }
     }
 }

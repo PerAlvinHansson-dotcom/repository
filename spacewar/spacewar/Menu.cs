@@ -7,22 +7,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-
-
 namespace spacewar
 {
-    class Projectile : GameObject
+    class Menu
     {
-        public Projectile(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
-        {
-
-        }
-
-        
-
-        public void Update()
-        {
-
-        }
+        protected Texture2D texture;
+        protected Vector2 position;
     }
 }
