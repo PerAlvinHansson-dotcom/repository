@@ -17,7 +17,11 @@ namespace spacewar
         KeyboardState newstate;
 
         public bool harTryckt;
+<<<<<<< HEAD
         public float speed = 5;
+=======
+        public int speed = 5;
+>>>>>>> 7d4160afa3d19801fd565d3e3f396fba2d1c0ac1
         List<Projectile> projectiles;
         float angle;
         Vector2 origin;
@@ -32,10 +36,18 @@ namespace spacewar
         {
             projectiles = new List<Projectile>();
             origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
+<<<<<<< HEAD
+
+        }
+=======
+>>>>>>> 7d4160afa3d19801fd565d3e3f396fba2d1c0ac1
 
         }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 7d4160afa3d19801fd565d3e3f396fba2d1c0ac1
         void alvinssmartametod()
         {
             harTryckt = !harTryckt;
@@ -95,6 +107,7 @@ namespace spacewar
                 velocity.Y = rotationshastighetY * speed;
                 angle -= 0.02f;
                 alvinssmartametod();
+<<<<<<< HEAD
             }
 
             if ((state.IsKeyDown(Keys.Up) && (state.IsKeyDown(Keys.Right))))
@@ -115,6 +128,28 @@ namespace spacewar
             }
 
 
+=======
+            }
+
+            if ((state.IsKeyDown(Keys.Up) && (state.IsKeyDown(Keys.Right))))
+            {
+
+                float rotationshastighetX = (float)Math.Cos((double)angle); 
+                float rotationshastighetY = (float)Math.Sin((double)angle);
+                velocity.X = rotationshastighetX * speed;
+                velocity.Y = rotationshastighetY * speed;
+                angle += 0.02f;
+                alvinssmartametod();
+            }
+
+            if (state.IsKeyDown(Keys.Left))
+            {
+                angle -= 0.07f;
+                alvinssmartametod();
+            }
+
+
+>>>>>>> 7d4160afa3d19801fd565d3e3f396fba2d1c0ac1
             if (state.IsKeyDown(Keys.Right))
             {
                 angle += 0.07f;
@@ -130,6 +165,18 @@ namespace spacewar
             {
                 projectile.Update();
             }
+<<<<<<< HEAD
+=======
+
+            oldstate = newstate;
+
+        }
+
+        public new void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, position, null, Color.White, angle, origin, 1, SpriteEffects.None, 1);
+        }
+>>>>>>> 7d4160afa3d19801fd565d3e3f396fba2d1c0ac1
 
             if (speed > 15)
             {

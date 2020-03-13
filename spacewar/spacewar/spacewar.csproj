@@ -48,7 +48,11 @@
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
     <Compile Include="Projectile.cs" />
+=======
+	<Compile Include="Projectile.cs" />
+>>>>>>> 7d4160afa3d19801fd565d3e3f396fba2d1c0ac1
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

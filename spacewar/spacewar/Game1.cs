@@ -18,9 +18,16 @@ namespace spacewar
 
         //Interface interface1;
         List<Powerup> powerups;
+<<<<<<< HEAD
         List<Texture2D> powerupTexture;
         int powerupTimer = 5000;
         Random rng = new Random();
+
+        Texture2D projectileTexture1;
+=======
+        //Interface interface1;
+        Texture2D powerupTexture;
+>>>>>>> 7d4160afa3d19801fd565d3e3f396fba2d1c0ac1
 
         Texture2D projectileTexture1;
 
@@ -58,10 +65,14 @@ namespace spacewar
             // TODO: use this.Content to load your game content here
             powerups = new List<Powerup>();
 
+<<<<<<< HEAD
             powerupTexture = new List<Texture2D>();
 
             powerupTexture.Add(Content.Load<Texture2D>("ball_1"));
             powerupTexture.Add(Content.Load<Texture2D>("ball_2"));
+=======
+            powerupTexture = Content.Load<Texture2D>("ball_1");
+>>>>>>> 7d4160afa3d19801fd565d3e3f396fba2d1c0ac1
             //printText = new Interface(Content.Load<SpriteFont>("sCORE:"));
 
             projectileTexture1 = Content.Load<Texture2D>("projectile_1");
@@ -109,8 +120,11 @@ namespace spacewar
             }
 
             player.Update();
+<<<<<<< HEAD
 
             powerupTimer -= gameTime.ElapsedGameTime.Milliseconds;
+=======
+>>>>>>> 7d4160afa3d19801fd565d3e3f396fba2d1c0ac1
             base.Update(gameTime);
         }
 
