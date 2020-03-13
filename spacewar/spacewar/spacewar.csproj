@@ -49,10 +49,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Compile Include="Projectile.cs" />
 =======
 	<Compile Include="Projectile.cs" />
 >>>>>>> 7d4160afa3d19801fd565d3e3f396fba2d1c0ac1
+=======
+    <Compile Include="Projectile.cs" />
+>>>>>>> a22bd19e7b700893f6e2ba6a02addca4e497e616
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
