@@ -20,7 +20,7 @@ namespace spacewar
         public float speed = 5;
         List<Projectile> projectiles;
         float angle;
-        float angleChange = 0.07f;
+        float angleChange = 0.04f;
         Vector2 origin;
         bool nextGenExperience = false;
         
