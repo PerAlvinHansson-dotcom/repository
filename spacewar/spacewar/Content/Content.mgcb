@@ -25,7 +25,6 @@
 /processorParam:TextureFormat=Color
 /build:ball_1.png
 
-<<<<<<< HEAD
 #begin ball_2.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -38,8 +37,6 @@
 /processorParam:TextureFormat=Color
 /build:ball_2.png
 
-=======
->>>>>>> 7d4160afa3d19801fd565d3e3f396fba2d1c0ac1
 #begin projectile_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
