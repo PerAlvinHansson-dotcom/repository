@@ -143,7 +143,7 @@ namespace spacewar
 
         public void SpeedUp()
         {
-           // speed *= 1.2f;
+            speed *= 1.2f;
         }
 
         public void PowerUp(int i)
