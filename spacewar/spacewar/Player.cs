@@ -144,6 +144,7 @@ namespace spacewar
         public void SpeedUp()
         {
             speed *= 1.2f;
+            angleChange *= 1.05f;
         }
 
         public void PowerUp(int i)
