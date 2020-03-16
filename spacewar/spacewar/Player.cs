@@ -1,8 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
 using System.Threading;
 
 namespace spacewar
@@ -14,11 +17,7 @@ namespace spacewar
         KeyboardState newstate;
 
         public bool harTryckt;
-<<<<<<< HEAD
         public float speed = 5;
-=======
-        public int speed = 5;
->>>>>>> 7d4160afa3d19801fd565d3e3f396fba2d1c0ac1
         List<Projectile> projectiles;
         float angle;
         float angleChange = 0.07f;
@@ -26,25 +25,14 @@ namespace spacewar
         bool nextGenExperience = false;
         
 
-
-
-
         public Player(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
         {
             projectiles = new List<Projectile>();
             origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
-<<<<<<< HEAD
-
-        }
-=======
->>>>>>> 7d4160afa3d19801fd565d3e3f396fba2d1c0ac1
 
         }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 7d4160afa3d19801fd565d3e3f396fba2d1c0ac1
+       
         void alvinssmartametod()
         {
             harTryckt = !harTryckt;
@@ -77,7 +65,6 @@ namespace spacewar
             }
 
 
-
             if (state.IsKeyDown(Keys.Down))
             {
                 float rotationshastighetX = -(float)Math.Cos((double)angle); //Konverterar till double och hittar cos för vinkeln, konvertar sedan till float för att det ska kunna tillämpas på velocity
@@ -104,7 +91,6 @@ namespace spacewar
                 velocity.Y = rotationshastighetY * speed;
                 angle -= angleChange;
                 alvinssmartametod();
-<<<<<<< HEAD
             }
 
             if ((state.IsKeyDown(Keys.Up) && (state.IsKeyDown(Keys.Right))))
@@ -114,19 +100,16 @@ namespace spacewar
                 float rotationshastighetY = (float)Math.Sin((double)angle);
                 velocity.X = rotationshastighetX * speed;
                 velocity.Y = rotationshastighetY * speed;
-                angle += 0.02f;
+                angle += angleChange;
                 alvinssmartametod();
             }
 
             if (state.IsKeyDown(Keys.Left))
             {
-                angle -= 0.07f;
+                angle -= angleChange;
                 alvinssmartametod();
             }
-
-
-=======
-            }
+         
 
             if ((state.IsKeyDown(Keys.Up) && (state.IsKeyDown(Keys.Right))))
             {
@@ -146,7 +129,6 @@ namespace spacewar
             }
 
 
->>>>>>> 7d4160afa3d19801fd565d3e3f396fba2d1c0ac1
             if (state.IsKeyDown(Keys.Right))
             {
                 angle += angleChange;
@@ -162,10 +144,9 @@ namespace spacewar
             {
                 projectile.Update();
             }
-<<<<<<< HEAD
-=======
 
             oldstate = newstate;
+
 
         }
 
@@ -173,23 +154,6 @@ namespace spacewar
         {
             spriteBatch.Draw(texture, position, null, Color.White, angle, origin, 1, SpriteEffects.None, 1);
         }
->>>>>>> 7d4160afa3d19801fd565d3e3f396fba2d1c0ac1
-
-            if (speed > 15)
-            {
-                speed = 15;
-            }
-
-            oldstate = newstate;
-
-        }
-
-        public new void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(texture, position, null, Color.White, angle, origin, 1, SpriteEffects.None, 1);
-        }
-
-
 
         public bool Intersects(Rectangle otherObject)
         {
