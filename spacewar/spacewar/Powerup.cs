@@ -8,6 +8,11 @@ using System.Threading.Tasks;
 
 namespace spacewar
 {
+    enum PowerUp
+    {
+        Speed
+    }
+
     class Powerup : GameObject
     {
         //Konstruktor
