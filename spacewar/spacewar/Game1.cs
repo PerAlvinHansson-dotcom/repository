@@ -12,24 +12,23 @@ namespace spacewar
     public class Game1 : Game
     {
         Player player;
-        //Interface printText;
+        Interface printText;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-       //Interface interface1;
+
+        //Interface interface1;
         List<Powerup> powerups;
         List<Texture2D> powerupTexture;
         int powerupTimer = 5000;
         Random rng = new Random();
- 
-        Texture2D projectileTexture1;
+
+        public static Texture2D projectileTexture1;
+        
         //Interface interface1;
 
         public Game1()
         {
-            
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 1920;
-            graphics.PreferredBackBufferHeight = 1080;
             Content.RootDirectory = "Content";
         }
 
@@ -44,7 +43,7 @@ namespace spacewar
             // TODO: Add your initialization logic here
 
             base.Initialize();
-
+            
 
         }
 
@@ -56,7 +55,7 @@ namespace spacewar
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            player = new Player(Content.Load<Texture2D>("ship"), new Vector2(200, 150));
+            player = new Player(Content.Load<Texture2D>("ship"), new Vector2(10, 150));
 
             // TODO: use this.Content to load your game content here
             powerups = new List<Powerup>();
@@ -65,7 +64,7 @@ namespace spacewar
 
             powerupTexture.Add(Content.Load<Texture2D>("ball_1"));
             powerupTexture.Add(Content.Load<Texture2D>("ball_2"));
-            //printText = new Interface(Content.Load<SpriteFont>("sCORE:"));
+            printText = new Interface(Content.Load<SpriteFont>("Font1"));
 
             projectileTexture1 = Content.Load<Texture2D>("projectile_1");
         }
@@ -89,16 +88,10 @@ namespace spacewar
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-
-           
-
-
-
-
             // TODO: Add your update logic here
 
             int i = 0;
-           
+
             if (powerupTimer <= 0)
             {
                 i = rng.Next(0, 2);
@@ -121,6 +114,7 @@ namespace spacewar
 
             powerupTimer -= gameTime.ElapsedGameTime.Milliseconds;
             base.Update(gameTime);
+            
         }
 
         /// <summary>
@@ -142,7 +136,7 @@ namespace spacewar
             }
             player.Draw(spriteBatch);
             base.Draw(gameTime);
-            //printText.Print("tEST", spriteBatch, 2, 2);
+            printText.Print("Score:", spriteBatch, 2, 2);
             spriteBatch.End();
         }
     }
