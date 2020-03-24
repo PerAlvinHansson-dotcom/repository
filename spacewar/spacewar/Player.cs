@@ -12,9 +12,13 @@ namespace spacewar
 {
     class Player : GameObject
     {
-
+        
         KeyboardState oldstate;
         KeyboardState newstate;
+
+
+       
+
 
         public bool harTryckt;
         public float speed = 5;
@@ -23,7 +27,11 @@ namespace spacewar
         float angleChange = 0.04f;
         Vector2 origin;
         bool nextGenExperience = false;
-        
+
+
+
+
+
 
         public Player(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
         {
@@ -38,10 +46,26 @@ namespace spacewar
             harTryckt = !harTryckt;
         }
 
-    
+        /*void hastighet(KeyboardState key, int värde) //Metod för förändring av hastighet och rotationshastighet?
+        {
+            if(key == )
+            {
+                float rotationshastighetX = värde * (float)Math.Cos((double)angle); //Konverterar till double och hittar cos för vinkeln, konvertar sedan till float för att det ska kunna tillämpas på velocity
+                float rotationshastighetY = värde * (float)Math.Sin((double)angle);
+                velocity.X = rotationshastighetX * speed;
+                velocity.Y = rotationshastighetY * speed;
+                alvinssmartametod();
+            }
+        }*/
+
+
+
+
 
         public new void Update()
         {
+
+
             newstate = Keyboard.GetState();
             if (harTryckt == false)
             {
@@ -59,12 +83,34 @@ namespace spacewar
                 Thread.Sleep(30);
             }
 
+            if(position.X > 1920)
+            {
+                position.X = 1920;
+            }
+
+            if (position.X < 0)
+            {
+                position.X = 0;
+            }
+
+            if (position.Y > 1080)
+            {
+                position.Y = 1080;
+            }
+
+            if (position.Y < 0)
+            {
+                position.Y = 0;
+            }
+
+
+
+            //----------------KONTROLLER------------------------------
             if (newstate.IsKeyDown(Keys.L) && oldstate.IsKeyUp(Keys.L))
             {
                 nextGenExperience = !nextGenExperience;
             }
-
-
+         
             if (state.IsKeyDown(Keys.Down))
             {
                 float rotationshastighetX = -(float)Math.Cos((double)angle); //Konverterar till double och hittar cos för vinkeln, konvertar sedan till float för att det ska kunna tillämpas på velocity
@@ -121,10 +167,13 @@ namespace spacewar
                 projectiles.Add(new Projectile(texture, position));
             }
 
+            //-----------------------------------------------------
+
             foreach (Projectile projectile in projectiles)
             {
                 projectile.Update();
             }
+
 
             oldstate = newstate;
 

@@ -15,19 +15,21 @@ namespace spacewar
         //Interface printText;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
-        //Interface interface1;
+       //Interface interface1;
         List<Powerup> powerups;
         List<Texture2D> powerupTexture;
         int powerupTimer = 5000;
         Random rng = new Random();
-
+ 
         Texture2D projectileTexture1;
         //Interface interface1;
 
         public Game1()
         {
+            
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
             Content.RootDirectory = "Content";
         }
 
@@ -42,7 +44,7 @@ namespace spacewar
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            
+
 
         }
 
@@ -54,7 +56,7 @@ namespace spacewar
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            player = new Player(Content.Load<Texture2D>("ship"), new Vector2(10, 150));
+            player = new Player(Content.Load<Texture2D>("ship"), new Vector2(200, 150));
 
             // TODO: use this.Content to load your game content here
             powerups = new List<Powerup>();
@@ -87,10 +89,16 @@ namespace spacewar
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+
+           
+
+
+
+
             // TODO: Add your update logic here
 
             int i = 0;
-
+           
             if (powerupTimer <= 0)
             {
                 i = rng.Next(0, 2);
