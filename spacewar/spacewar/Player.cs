@@ -29,7 +29,7 @@ namespace spacewar
         {
             projectiles = new List<Projectile>();
             origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
-
+          
         }
 
        
