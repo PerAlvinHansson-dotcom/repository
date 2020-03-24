@@ -116,11 +116,11 @@ namespace spacewar
                 alvinssmartametod();
             }
 
-            if (state.IsKeyDown(Keys.Space))
+            //skjut och skapa projectile
+            if (newstate.IsKeyDown(Keys.RightControl) && oldstate.IsKeyUp(Keys.RightControl))
             {
-                projectiles.Add(new Projectile(texture, position));
+                projectiles.Add(new Projectile(Game1.projectileTexture1, new Vector2(50, 150)));
             }
-
             foreach (Projectile projectile in projectiles)
             {
                 projectile.Update();
@@ -134,6 +134,10 @@ namespace spacewar
         public new void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, null, Color.White, angle, origin, 1, SpriteEffects.None, 1);
+            foreach (Projectile projectile in projectiles)
+            {
+                projectile.Draw(spriteBatch);
+            }
         }
 
         public bool Intersects(Rectangle otherObject)

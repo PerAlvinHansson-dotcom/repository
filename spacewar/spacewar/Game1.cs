@@ -22,7 +22,8 @@ namespace spacewar
         int powerupTimer = 5000;
         Random rng = new Random();
 
-        Texture2D projectileTexture1;
+        public static Texture2D projectileTexture1;
+        
         //Interface interface1;
 
         public Game1()
@@ -113,6 +114,7 @@ namespace spacewar
 
             powerupTimer -= gameTime.ElapsedGameTime.Milliseconds;
             base.Update(gameTime);
+            
         }
 
         /// <summary>
