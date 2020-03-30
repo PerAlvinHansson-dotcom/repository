@@ -32,7 +32,7 @@ namespace spacewar
         {
             projectiles = new List<Projectile>();
             origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
-
+          
         }
 
        
@@ -59,6 +59,25 @@ namespace spacewar
 
             KeyboardState state = Keyboard.GetState();
 
+            if(position.X > 1920)
+            {
+                position.X = 1920;
+            }
+
+            if (position.X < 0)
+            {
+                position.X = 0;
+            }
+
+            if (position.Y > 1080)
+            {
+                position.Y = 1080;
+            }
+
+            if (position.Y < 0)
+            {
+                position.Y = 0; 
+            }
 
             if (nextGenExperience == true)
             {
@@ -122,11 +141,11 @@ namespace spacewar
                 alvinssmartametod();
             }
 
-            if (state.IsKeyDown(Keys.Space))
+            //skjut och skapa projectile
+            if (newstate.IsKeyDown(Keys.RightControl) && oldstate.IsKeyUp(Keys.RightControl))
             {
-                projectiles.Add(new Projectile(texture, position));
+                projectiles.Add(new Projectile(Game1.projectileTexture1, new Vector2(50, 150)));
             }
-
             foreach (Projectile projectile in projectiles)
             {
                 projectile.Update();
@@ -143,6 +162,10 @@ namespace spacewar
         public new void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, null, Color.White, angle, origin, 1, SpriteEffects.None, 1);
+            foreach (Projectile projectile in projectiles)
+            {
+                projectile.Draw(spriteBatch);
+            }
         }
 
         public bool Intersects(Rectangle otherObject)

@@ -15,14 +15,17 @@ namespace spacewar
     {
         public Projectile(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
         {
-
+            velocity = new Vector2(8, 0);
         }
 
-        
+        /*public new void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, position, Color.White);
+        }*/
 
-        public void Update()
+        /*public void Update()
         {
 
-        }
+        }*/
     }
 }

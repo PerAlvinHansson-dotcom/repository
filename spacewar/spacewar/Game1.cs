@@ -12,7 +12,7 @@ namespace spacewar
     public class Game1 : Game
     {
         Player player;
-        //Interface printText;
+        Interface printText;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -23,13 +23,16 @@ namespace spacewar
 
         int randomPower;
 
-        Texture2D projectileTexture1;
+        public static Texture2D projectileTexture1;
+        
         //Interface interface1;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
         }
 
         /// <summary>
@@ -64,8 +67,12 @@ namespace spacewar
 
             powerupTexture.Add(Content.Load<Texture2D>("ball_1"));
             powerupTexture.Add(Content.Load<Texture2D>("ball_2"));
+<<<<<<< HEAD
 
             //printText = new Interface(Content.Load<SpriteFont>("sCORE:"));
+=======
+            printText = new Interface(Content.Load<SpriteFont>("Font1"));
+>>>>>>> 9c4f2258c9d03cdbbbbbf253983dadc88421545e
 
             projectileTexture1 = Content.Load<Texture2D>("projectile_1");
         }
@@ -86,6 +93,9 @@ namespace spacewar
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+
+
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -115,6 +125,7 @@ namespace spacewar
 
             powerupTimer -= gameTime.ElapsedGameTime.Milliseconds;
             base.Update(gameTime);
+            
         }
 
         /// <summary>
@@ -136,7 +147,7 @@ namespace spacewar
             }
             player.Draw(spriteBatch);
             base.Draw(gameTime);
-            //printText.Print("tEST", spriteBatch, 2, 2);
+            printText.Print("Score:", spriteBatch, 2, 2);
             spriteBatch.End();
         }
     }

@@ -11,6 +11,7 @@ namespace spacewar
 {
     abstract class GameObject
     {
+       
         protected Texture2D texture;
         protected Vector2 position, velocity;
 
