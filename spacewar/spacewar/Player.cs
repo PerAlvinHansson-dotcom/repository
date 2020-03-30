@@ -23,7 +23,10 @@ namespace spacewar
         float angleChange = 0.04f;
         Vector2 origin;
         bool nextGenExperience = false;
-        
+
+        PowerUps pu = new PowerUps();
+
+        Random rng = new Random();
 
         public Player(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
         {
@@ -38,7 +41,10 @@ namespace spacewar
             harTryckt = !harTryckt;
         }
 
-    
+        public void IsAlive()
+        {
+
+        }
 
         public new void Update()
         {
@@ -147,7 +153,10 @@ namespace spacewar
 
             oldstate = newstate;
 
-
+            if(speed > 10)
+            {
+                speed = 10;
+            }
         }
 
         public new void Draw(SpriteBatch spriteBatch)
@@ -164,15 +173,23 @@ namespace spacewar
             return Hitbox.Intersects(otherObject);
         }
 
+        public PowerUps RandomPower()
+        {
+            Array values = Enum.GetValues(typeof(PowerUps));
+            PowerUps randomPower = (PowerUps)values.GetValue(rng.Next(values.Length));
+
+            return randomPower;
+        }
+
         public void SpeedUp()
         {
-            speed *= 1.2f;
+            speed *= 1.15f;
             angleChange *= 1.05f;
         }
 
-        public void PowerUp(int i)
+        public void PowerUp(PowerUps powerUps)
         {
-            if(i == 0)
+            if(pu == PowerUps.Speed)
             {
                 SpeedUp();
             }
