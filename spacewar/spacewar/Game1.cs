@@ -22,13 +22,16 @@ namespace spacewar
         int powerupTimer = 5000;
         Random rng = new Random();
 
-        Texture2D projectileTexture1;
+        public static Texture2D projectileTexture1;
+        
         //Interface interface1;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
         }
 
         /// <summary>
@@ -116,6 +119,7 @@ namespace spacewar
 
             powerupTimer -= gameTime.ElapsedGameTime.Milliseconds;
             base.Update(gameTime);
+            
         }
 
         /// <summary>
