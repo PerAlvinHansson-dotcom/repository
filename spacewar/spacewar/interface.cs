@@ -9,6 +9,11 @@ using Microsoft.Xna.Framework.Content;
 
 namespace spacewar
 {
+    enum {
+        menu,
+        game,
+        settings
+    }
     class Interface
     {
         private SpriteFont font;
