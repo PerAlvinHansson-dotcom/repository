@@ -148,7 +148,7 @@ namespace spacewar
             //skjut och skapa projectile
             if (newstate.IsKeyDown(Keys.RightControl) && oldstate.IsKeyUp(Keys.RightControl))
             {
-                projectiles.Add(new Projectile(Game1.projectileTexture1, new Vector2(50, 150)));
+                projectiles.Add(new Projectile(Game1.projectileTexture1, position, angle, origin));
             }
             foreach (Projectile projectile in projectiles)
             {
