@@ -11,11 +11,11 @@ namespace spacewar
     /// </summary>
     public class Game1 : Game
     {
+        Texture2D background;
         Player player;
         Interface printText;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
         //Interface interface1;
         List<Powerup> powerups;
         List<Texture2D> powerupTexture;
@@ -58,7 +58,7 @@ namespace spacewar
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             player = new Player(Content.Load<Texture2D>("ship"), new Vector2(10, 150));
-
+            background = Content.Load<Texture2D>("space2");
             // TODO: use this.Content to load your game content here
             powerups = new List<Powerup>();
             
@@ -135,6 +135,7 @@ namespace spacewar
      
             
             spriteBatch.Begin();
+            spriteBatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.White);
             foreach (Powerup power in powerups)
             {
                 power.Draw(spriteBatch);
