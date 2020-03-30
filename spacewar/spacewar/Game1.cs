@@ -20,7 +20,8 @@ namespace spacewar
         List<Powerup> powerups;
         List<Texture2D> powerupTexture;
         int powerupTimer = 5000;
-        Random rng = new Random();
+
+        int randomPower;
 
         Texture2D projectileTexture1;
         //Interface interface1;
@@ -63,6 +64,7 @@ namespace spacewar
 
             powerupTexture.Add(Content.Load<Texture2D>("ball_1"));
             powerupTexture.Add(Content.Load<Texture2D>("ball_2"));
+
             //printText = new Interface(Content.Load<SpriteFont>("sCORE:"));
 
             projectileTexture1 = Content.Load<Texture2D>("projectile_1");
@@ -89,12 +91,12 @@ namespace spacewar
 
             // TODO: Add your update logic here
 
-            int i = 0;
+            //int i = 0;
 
             if (powerupTimer <= 0)
             {
-                i = rng.Next(0, 2);
-                powerups.Add(new Powerup(powerupTexture[i], new Vector2(0, 0)));
+                randomPower = (int)player.RandomPower();
+                powerups.Add(new Powerup(powerupTexture[randomPower], new Vector2(0, 0)));
                 powerupTimer = 1000;
             }
 
@@ -104,7 +106,7 @@ namespace spacewar
 
                 if (player.Intersects(power.Hitbox))
                 {
-                    player.PowerUp(i);
+                    player.PowerUp((PowerUps)randomPower);
                     powerups.Remove(power);
                 }
             }
@@ -125,7 +127,7 @@ namespace spacewar
 
             // TODO: Add your drawing code here
 
-     
+            
             
             spriteBatch.Begin();
             foreach (Powerup power in powerups)

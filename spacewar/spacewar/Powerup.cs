@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace spacewar
 {
-    enum PowerUp
+    enum PowerUps
     {
         Speed
     }
