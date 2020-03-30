@@ -58,8 +58,12 @@ namespace spacewar
             position += velocity;
 
             KeyboardState state = Keyboard.GetState();
+            bool right = state.IsKeyDown(Keys.Right);
+            bool left = state.IsKeyDown(Keys.Left);
+            bool up = state.IsKeyDown(Keys.Up);
+            bool down = state.IsKeyDown(Keys.Down);
 
-            if(position.X > 1920)
+            if (position.X > 1920)
             {
                 position.X = 1920;
             }
@@ -90,7 +94,7 @@ namespace spacewar
             }
 
 
-            if (state.IsKeyDown(Keys.Down))
+            if (down)
             {
                 float rotationshastighetX = -(float)Math.Cos((double)angle); //Konverterar till double och hittar cos för vinkeln, konvertar sedan till float för att det ska kunna tillämpas på velocity
                 float rotationshastighetY = -(float)Math.Sin((double)angle); 
@@ -100,7 +104,7 @@ namespace spacewar
             }
 
 
-            if (state.IsKeyDown(Keys.Up))
+            if (up)
             {
                 float rotationshastighetX = (float)Math.Cos((double)angle);
                 float rotationshastighetY = (float)Math.Sin((double)angle);
@@ -109,7 +113,7 @@ namespace spacewar
                 alvinssmartametod();
             }
 
-            if ((state.IsKeyDown(Keys.Up) && (state.IsKeyDown(Keys.Left))))
+            if ((up && (left)))
             {
                 float rotationshastighetX = (float)Math.Cos((double)angle);
                 float rotationshastighetY = (float)Math.Sin((double)angle);
@@ -119,7 +123,7 @@ namespace spacewar
                 alvinssmartametod();
             }
 
-            if ((state.IsKeyDown(Keys.Up) && (state.IsKeyDown(Keys.Right))))
+            if ((up && (right)))
             {
                 float rotationshastighetX = (float)Math.Cos((double)angle);
                 float rotationshastighetY = (float)Math.Sin((double)angle);
