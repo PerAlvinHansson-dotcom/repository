@@ -102,42 +102,49 @@ namespace spacewar
                 nextGenExperience = !nextGenExperience;
             }
 
+            bool bajs = true;
+
+            switch (bajs)
+            {
+                
+            }
+
 
             if (down)
             {
-                float rotationshastighetX = -(float)Math.Cos((double)angle); //Konverterar till double och hittar cos för vinkeln, konvertar sedan till float för att det ska kunna tillämpas på velocity
-                float rotationshastighetY = -(float)Math.Sin((double)angle); 
-                velocity.X = rotationshastighetX * speed;
-                velocity.Y = rotationshastighetY * speed;
+                float hastighetX = -(float)Math.Cos((double)angle); //Konverterar till double och hittar cos för vinkeln, konvertar sedan till float för att det ska kunna tillämpas på velocity
+                float hastighetY = -(float)Math.Sin((double)angle); 
+                velocity.X = hastighetX  * speed;
+                velocity.Y = hastighetY * speed;
                 alvinssmartametod();
             }
 
 
             if (up)
             {
-                float rotationshastighetX = (float)Math.Cos((double)angle);
-                float rotationshastighetY = (float)Math.Sin((double)angle);
-                velocity.X = rotationshastighetX * speed;
-                velocity.Y = rotationshastighetY * speed;
+                float hastighetX  = (float)Math.Cos((double)angle);
+                float hastighetY = (float)Math.Sin((double)angle);
+                velocity.X = hastighetX  * speed;
+                velocity.Y = hastighetY * speed;
                 alvinssmartametod();
             }
 
             if ((up && (left)))
             {
-                float rotationshastighetX = (float)Math.Cos((double)angle);
-                float rotationshastighetY = (float)Math.Sin((double)angle);
-                velocity.X = rotationshastighetX * speed;
-                velocity.Y = rotationshastighetY * speed;
+                float hastighetX  = (float)Math.Cos((double)angle);
+                float hastighetY = (float)Math.Sin((double)angle);
+                velocity.X = hastighetX  * speed;
+                velocity.Y = hastighetY * speed;
                 angle -= angleChange;
                 alvinssmartametod();
             }
 
             if ((up && (right)))
             {
-                float rotationshastighetX = (float)Math.Cos((double)angle);
-                float rotationshastighetY = (float)Math.Sin((double)angle);
-                velocity.X = rotationshastighetX * speed;
-                velocity.Y = rotationshastighetY * speed;
+                float hastighetX  = (float)Math.Cos((double)angle);
+                float hastighetY = (float)Math.Sin((double)angle);
+                velocity.X = hastighetX  * speed;
+                velocity.Y = hastighetY * speed;
                 angle += angleChange;
                 alvinssmartametod();
             }
