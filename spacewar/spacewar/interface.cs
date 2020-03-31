@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace spacewar
 {
-    enum menus {
+    enum state {
         menu,
         game,
         settings

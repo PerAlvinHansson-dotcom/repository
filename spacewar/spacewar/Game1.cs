@@ -141,7 +141,7 @@ namespace spacewar
             }
             player.Draw(spriteBatch);
             base.Draw(gameTime);
-            printText.Print("Score:", spriteBatch, 2, 2);
+            printText.Print("Score:" + , spriteBatch, 2, 2);
             spriteBatch.End();
         }
     }
