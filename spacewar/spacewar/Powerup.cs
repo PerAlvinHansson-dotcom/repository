@@ -10,15 +10,19 @@ namespace spacewar
 {
     enum PowerUps
     {
-        Speed
+        Speed,
+        shield
     }
 
     class Powerup : GameObject
     {
+        public PowerUps pu;
+
         //Konstruktor
-        public Powerup(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
+        public Powerup(Texture2D texture, Vector2 startPosition, PowerUps powerUps) : base(texture, startPosition)
         {
             velocity = new Vector2(2, 0);
+            pu = powerUps;
         }
     }
 }

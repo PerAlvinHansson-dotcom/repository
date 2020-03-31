@@ -68,14 +68,9 @@ namespace spacewar
             powerupTexture.Add(Content.Load<Texture2D>("ball_1"));
             powerupTexture.Add(Content.Load<Texture2D>("ball_2"));
 
-            //printText = new Interface(Content.Load<SpriteFont>("sCORE:"));
-<<<<<<< HEAD
-            printText = new Interface(Content.Load<SpriteFont>("Font1"));
-=======
-
             printText = new Interface(Content.Load<SpriteFont>("Font1"));
 
->>>>>>> 11aa0b1406a441d3dd90fcaf7f03fcf702484cf8
+            printText = new Interface(Content.Load<SpriteFont>("Font1"));
 
             projectileTexture1 = Content.Load<Texture2D>("projectile_1");
         }
@@ -109,7 +104,7 @@ namespace spacewar
             if (powerupTimer <= 0)
             {
                 randomPower = (int)player.RandomPower();
-                powerups.Add(new Powerup(powerupTexture[randomPower], new Vector2(0, 0)));
+                powerups.Add(new Powerup(powerupTexture[randomPower], new Vector2(0, 0), (PowerUps)randomPower));
                 powerupTimer = 1000;
             }
 
@@ -119,7 +114,7 @@ namespace spacewar
 
                 if (player.Intersects(power.Hitbox))
                 {
-                    player.PowerUp((PowerUps)randomPower);
+                    player.PowerUp(power.pu);
                     powerups.Remove(power);
                 }
             }
