@@ -11,16 +11,17 @@ namespace spacewar
     /// </summary>
     public class Game1 : Game
     {
+        Texture2D background;
         Player player;
         Interface printText;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
         //Interface interface1;
         List<Powerup> powerups;
         List<Texture2D> powerupTexture;
         int powerupTimer = 5000;
-        Random rng = new Random();
+
+        int randomPower;
 
         public static Texture2D projectileTexture1;
         
@@ -58,7 +59,7 @@ namespace spacewar
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             player = new Player(Content.Load<Texture2D>("ship"), new Vector2(10, 150));
-
+            background = Content.Load<Texture2D>("space2");
             // TODO: use this.Content to load your game content here
             powerups = new List<Powerup>();
             
@@ -66,7 +67,15 @@ namespace spacewar
 
             powerupTexture.Add(Content.Load<Texture2D>("ball_1"));
             powerupTexture.Add(Content.Load<Texture2D>("ball_2"));
+
+            //printText = new Interface(Content.Load<SpriteFont>("sCORE:"));
+<<<<<<< HEAD
             printText = new Interface(Content.Load<SpriteFont>("Font1"));
+=======
+
+            printText = new Interface(Content.Load<SpriteFont>("Font1"));
+
+>>>>>>> 11aa0b1406a441d3dd90fcaf7f03fcf702484cf8
 
             projectileTexture1 = Content.Load<Texture2D>("projectile_1");
         }
@@ -95,12 +104,12 @@ namespace spacewar
 
             // TODO: Add your update logic here
 
-            int i = 0;
+            //int i = 0;
 
             if (powerupTimer <= 0)
             {
-                i = rng.Next(0, 2);
-                powerups.Add(new Powerup(powerupTexture[i], new Vector2(0, 0)));
+                randomPower = (int)player.RandomPower();
+                powerups.Add(new Powerup(powerupTexture[randomPower], new Vector2(0, 0)));
                 powerupTimer = 1000;
             }
 
@@ -110,7 +119,7 @@ namespace spacewar
 
                 if (player.Intersects(power.Hitbox))
                 {
-                    player.PowerUp(i);
+                    player.PowerUp((PowerUps)randomPower);
                     powerups.Remove(power);
                 }
             }
@@ -132,9 +141,10 @@ namespace spacewar
 
             // TODO: Add your drawing code here
 
-     
+            
             
             spriteBatch.Begin();
+            spriteBatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.White);
             foreach (Powerup power in powerups)
             {
                 power.Draw(spriteBatch);
