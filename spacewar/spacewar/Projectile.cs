@@ -18,14 +18,16 @@ namespace spacewar
 
         public Projectile(Texture2D texture, Vector2 startPosition, float angle, Vector2 origin) : base(texture, startPosition)
         {
-            //velocity = new Vector2(8, 0);
             pAngle = angle;
-            //pOrigin = origin;
+            pOrigin = origin;
+
+            Vector2 direction = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
+            velocity = direction * 15;
+
         }
 
         public new void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(texture, position, Color.White);
             spriteBatch.Draw(texture, position, null, Color.White, pAngle, pOrigin, 1, SpriteEffects.None, 1);
         }
 
