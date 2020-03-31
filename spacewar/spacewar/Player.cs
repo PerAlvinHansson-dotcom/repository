@@ -153,9 +153,14 @@ namespace spacewar
 
             oldstate = newstate;
 
-            if(speed > 10)
+            if (speed > 10)
             {
                 speed = 10;
+            }
+
+            if (angleChange > 0.1f)
+            {
+                angleChange = 0.1f;
             }
         }
 

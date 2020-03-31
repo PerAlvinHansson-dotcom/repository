@@ -67,12 +67,9 @@ namespace spacewar
 
             powerupTexture.Add(Content.Load<Texture2D>("ball_1"));
             powerupTexture.Add(Content.Load<Texture2D>("ball_2"));
-<<<<<<< HEAD
 
             //printText = new Interface(Content.Load<SpriteFont>("sCORE:"));
-=======
             printText = new Interface(Content.Load<SpriteFont>("Font1"));
->>>>>>> 9c4f2258c9d03cdbbbbbf253983dadc88421545e
 
             projectileTexture1 = Content.Load<Texture2D>("projectile_1");
         }
