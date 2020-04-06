@@ -16,13 +16,30 @@ namespace spacewar
         float pAngle;
         Vector2 pOrigin;
 
-        public Projectile(Texture2D texture, Vector2 startPosition, float angle, Vector2 origin) : base(texture, startPosition)
+        public Projectile(Texture2D texture, Vector2 startPosition, float angle, Vector2 origin, string weapon) : base(texture, startPosition)
         {
             pAngle = angle;
             pOrigin = origin;
 
             Vector2 direction = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
             velocity = direction * 15;
+        }
+
+        //projectile_1
+        public void Laser()
+        {
+
+        }
+        
+        //projectile_2
+        public void Coilgun()
+        {
+
+        }
+
+        //projectile_3
+        public void Plasma()
+        {
 
         }
 
