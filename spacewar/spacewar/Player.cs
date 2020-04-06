@@ -24,7 +24,11 @@ namespace spacewar
         Vector2 origin;
         bool nextGenExperience = false;
 
-        PowerUps pu = new PowerUps();
+        Vector2 startPosition;
+        float startSpeed = 5;
+
+        bool isAlive = true;
+        bool shield = false;
 
         Random rng = new Random();
 
@@ -32,7 +36,8 @@ namespace spacewar
         {
             projectiles = new List<Projectile>();
             origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
-          
+
+            this.startPosition = startPosition;
         }
 
        
@@ -41,14 +46,18 @@ namespace spacewar
             harTryckt = !harTryckt;
         }
 
-        public void IsAlive()
-        {
-
-        }
-
         public new void Update()
         {
             newstate = Keyboard.GetState();
+
+            if (!isAlive)
+            {
+                position = startPosition;
+                speed = startSpeed;
+
+                isAlive = true;
+            }
+
             if (harTryckt == false)
             {
                 velocity.Y = 0;
@@ -155,11 +164,24 @@ namespace spacewar
             //skjut och skapa projectile
             if (newstate.IsKeyDown(Keys.RightControl) && oldstate.IsKeyUp(Keys.RightControl))
             {
-                projectiles.Add(new Projectile(Game1.projectileTexture1, position, angle, origin));
+                projectiles.Add(new Projectile(Game1.projectileTexture1, position, angle, origin, "laser"));
             }
-            foreach (Projectile projectile in projectiles)
+            foreach (Projectile projectile in projectiles.ToArray())
             {
                 projectile.Update();
+
+                if (Intersects(projectile.Hitbox))
+                {
+                    if (shield)
+                    {
+                        shield = false;
+                    }
+                    else
+                    {
+                        isAlive = false;
+                    }
+                    projectiles.Remove(projectile);
+                }
             }
 
             oldstate = newstate;
@@ -169,9 +191,9 @@ namespace spacewar
                 speed = 10;
             }
 
-            if (angleChange > 0.1f)
+            if (angleChange > 0.07f)
             {
-                angleChange = 0.1f;
+                angleChange = 0.07f;
             }
         }
 
@@ -189,7 +211,7 @@ namespace spacewar
             return Hitbox.Intersects(otherObject);
         }
 
-        public PowerUps RandomPower()
+        public PowerUps RandomPower() //Skickar en random powerup när man skapar/krockar med en powerup
         {
             Array values = Enum.GetValues(typeof(PowerUps));
             PowerUps randomPower = (PowerUps)values.GetValue(rng.Next(values.Length));
@@ -197,17 +219,21 @@ namespace spacewar
             return randomPower;
         }
 
-        public void SpeedUp()
+        public void SpeedUp() //Mer speed
         {
             speed *= 1.15f;
-            angleChange *= 1.05f;
+            angleChange *= 1.02f;
         }
 
         public void PowerUp(PowerUps powerUps)
         {
-            if(pu == PowerUps.Speed)
+            if(powerUps == PowerUps.Speed)
             {
                 SpeedUp();
+            }
+            else if(powerUps == PowerUps.shield) //Kollar om det finns en sköld eller ej
+            {
+                shield = true;
             }
         }
     }

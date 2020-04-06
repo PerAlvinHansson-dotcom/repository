@@ -109,7 +109,7 @@ namespace spacewar
             if (powerupTimer <= 0)
             {
                 randomPower = (int)player.RandomPower();
-                powerups.Add(new Powerup(powerupTexture[randomPower], new Vector2(0, 0)));
+                powerups.Add(new Powerup(powerupTexture[randomPower], new Vector2(0, 0), (PowerUps)randomPower));
                 powerupTimer = 1000;
             }
 
@@ -119,7 +119,7 @@ namespace spacewar
 
                 if (player.Intersects(power.Hitbox))
                 {
-                    player.PowerUp((PowerUps)randomPower);
+                    player.PowerUp(power.pu);
                     powerups.Remove(power);
                 }
             }
