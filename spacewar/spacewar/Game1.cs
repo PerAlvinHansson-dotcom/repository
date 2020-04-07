@@ -12,7 +12,7 @@ namespace spacewar
     public class Game1 : Game
     {
         Texture2D background;
-        Player player;
+        Player player, player2;
         Interface printText;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -58,7 +58,8 @@ namespace spacewar
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            player = new Player(Content.Load<Texture2D>("ship"), new Vector2(10, 150));
+            player = new Player(Content.Load<Texture2D>("ship"), new Vector2(100, 150), "a");
+            player2 = new Player(Content.Load<Texture2D>("ship"), new Vector2(1820, 150), "b");
             background = Content.Load<Texture2D>("space2");
             // TODO: use this.Content to load your game content here
             powerups = new List<Powerup>();
@@ -97,8 +98,6 @@ namespace spacewar
         protected override void Update(GameTime gameTime)
         {
 
-
-
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -122,9 +121,16 @@ namespace spacewar
                     player.PowerUp((PowerUps)randomPower);
                     powerups.Remove(power);
                 }
+
+                if (player2.Intersects(power.Hitbox))
+                {
+                    player2.PowerUp((PowerUps)randomPower);
+                    powerups.Remove(power);
+                }
             }
 
             player.Update();
+            player2.Update();
 
             powerupTimer -= gameTime.ElapsedGameTime.Milliseconds;
             base.Update(gameTime);
@@ -150,8 +156,9 @@ namespace spacewar
                 power.Draw(spriteBatch);
             }
             player.Draw(spriteBatch);
+            player2.Draw(spriteBatch);
             base.Draw(gameTime);
-            printText.Print("Score:" + , spriteBatch, 2, 2);
+            printText.Print("Score:", spriteBatch, 2, 2);
             spriteBatch.End();
         }
     }
