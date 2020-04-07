@@ -29,7 +29,7 @@ namespace spacewar
 
 
        
-        PowerUps pu = new PowerUps();
+        PowerUps powerups = new PowerUps();
 
         Random rng = new Random();
 
@@ -227,7 +227,7 @@ namespace spacewar
 
         public void PowerUp(PowerUps powerUps)
         {
-            if(pu == PowerUps.Speed)
+            if(powerups == PowerUps.Speed)
             {
                 SpeedUp();
             }
