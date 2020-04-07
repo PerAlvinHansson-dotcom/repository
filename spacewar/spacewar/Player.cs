@@ -52,12 +52,9 @@ namespace spacewar
         {
             newstate = Keyboard.GetState();
 
-            if (!isAlive)
+            if (!isAlive) //Kollar om du dog förra updaten
             {
-                position = startPosition;
-                speed = startSpeed;
-
-                isAlive = true;
+                Respawn();
             }
 
             if (harTryckt == false)
@@ -173,11 +170,11 @@ namespace spacewar
             {
                 projectile.Update();
 
-                if (Intersects(projectile.Hitbox))
+                if (Intersects(projectile.Hitbox))//Kollar igenom alla skotten för att se om de har träffat något //Hugo
                 {
                     if (unKillableTimer < 0)
                     {
-                        if (shield)
+                        if (shield)//Kollar om det finns en sköld eller inte
                         {
                             shield = false;
                         }
@@ -193,12 +190,12 @@ namespace spacewar
 
             oldstate = newstate;
 
-            if (speed > 10)
+            if (speed > 10) //Hugo
             {
                 speed = 10;
             }
 
-            if (angleChange > 0.07f)
+            if (angleChange > 0.07f) //Hugo
             {
                 angleChange = 0.07f;
             }
@@ -215,12 +212,12 @@ namespace spacewar
             }
         }
 
-        public bool Intersects(Rectangle otherObject)
+        public bool Intersects(Rectangle otherObject) //Kollar om man krockar
         {
             return Hitbox.Intersects(otherObject);
         }
 
-        public PowerUps RandomPower() //Skickar en random powerup när man skapar/krockar med en powerup
+        public PowerUps RandomPower() //Skickar en random power när man skapar en powerup //Hugo
         {
             Array values = Enum.GetValues(typeof(PowerUps));
             PowerUps randomPower = (PowerUps)values.GetValue(rng.Next(values.Length));
@@ -228,13 +225,13 @@ namespace spacewar
             return randomPower;
         }
 
-        public void SpeedUp() //Mer speed
+        public void SpeedUp() //Större hastighet //Hugo
         {
             speed *= 1.15f;
             angleChange *= 1.02f;
         }
 
-        public void PowerUp(PowerUps powerUps)
+        public void PowerUp(PowerUps powerUps) //Hugo
         {
             if(powerUps == PowerUps.Speed)
             {
@@ -244,6 +241,14 @@ namespace spacewar
             {
                 shield = true;
             }
+        }
+
+        public void Respawn() //Nollställer dina stats och skickar tillbacka dig till start positionen //Hugo
+        {
+            position = startPosition;
+            speed = startSpeed;
+
+            isAlive = true;
         }
     }
 }
