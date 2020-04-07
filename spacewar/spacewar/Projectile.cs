@@ -1,4 +1,5 @@
-﻿using System;
+﻿//sebastian
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,9 +23,22 @@ namespace spacewar
             pOrigin = origin;
 
             Vector2 direction = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
-            velocity = direction * 15;
-        }
+            
 
+            if (weapon == "laser")
+            {
+                velocity = direction * 20;
+            }
+            if (weapon == "coilgun")
+            {
+                velocity = direction * 15;
+            }
+            if (weapon == "plasma")
+            {
+                velocity = direction * 10;
+            }
+        }
+        /*
         //projectile_1
         public void Laser()
         {
@@ -42,6 +56,7 @@ namespace spacewar
         {
 
         }
+        */
 
         public new void Draw(SpriteBatch spriteBatch)
         {
