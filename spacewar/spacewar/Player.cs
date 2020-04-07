@@ -28,6 +28,7 @@ namespace spacewar
         //Vector2 mittpunkt = new Vector2(900, 540);
 
 
+       
         PowerUps pu = new PowerUps();
 
         Random rng = new Random();
