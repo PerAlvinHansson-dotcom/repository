@@ -179,7 +179,7 @@ namespace spacewar
             {
                 projectiles.Add(new Projectile(Game1.projectileTexture1, position, angle, origin));
             }
-            foreach (Projectile projectile in projectiles)
+            foreach (Projectile projectile in projectiles.ToArray())
             {
                 projectile.Update();
             }
