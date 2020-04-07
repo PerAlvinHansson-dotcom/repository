@@ -23,6 +23,8 @@ namespace spacewar
 
         int randomPower;
 
+        Random rng = new Random();
+
         public static Texture2D projectileTexture1;
         
         //Interface interface1;
@@ -109,8 +111,8 @@ namespace spacewar
             if (powerupTimer <= 0)
             {
                 randomPower = (int)player.RandomPower();
-                powerups.Add(new Powerup(powerupTexture[randomPower], new Vector2(0, 0), (PowerUps)randomPower));
-                powerupTimer = 1000;
+                powerups.Add(new Powerup(powerupTexture[randomPower], new Vector2(rng.Next(100,1720), rng.Next(100,880)), (PowerUps)randomPower));
+                powerupTimer = 5000;
             }
 
             foreach (Powerup power in powerups.ToArray())
@@ -124,7 +126,7 @@ namespace spacewar
                 }
             }
 
-            player.Update();
+            player.Update(gameTime);
 
             powerupTimer -= gameTime.ElapsedGameTime.Milliseconds;
             base.Update(gameTime);

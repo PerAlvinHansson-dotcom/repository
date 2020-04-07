@@ -18,7 +18,7 @@ namespace spacewar
 
         public bool harTryckt;
         public float speed = 5;
-        List<Projectile> projectiles;
+        public List<Projectile> projectiles;
         float angle;
         float angleChange = 0.04f;
         Vector2 origin;
@@ -29,6 +29,8 @@ namespace spacewar
 
         bool isAlive = true;
         bool shield = false;
+
+        int unKillableTimer = 500;
 
         Random rng = new Random();
 
@@ -46,7 +48,7 @@ namespace spacewar
             harTryckt = !harTryckt;
         }
 
-        public new void Update()
+        public new void Update(GameTime gameTime)
         {
             newstate = Keyboard.GetState();
 
@@ -166,21 +168,26 @@ namespace spacewar
             {
                 projectiles.Add(new Projectile(Game1.projectileTexture1, position, angle, origin, "laser"));
             }
+
             foreach (Projectile projectile in projectiles.ToArray())
             {
                 projectile.Update();
 
                 if (Intersects(projectile.Hitbox))
                 {
-                    if (shield)
+                    if (unKillableTimer < 0)
                     {
-                        shield = false;
+                        if (shield)
+                        {
+                            shield = false;
+                        }
+                        else
+                        {
+                            isAlive = false;
+                        }
+                        unKillableTimer = 500;
                     }
-                    else
-                    {
-                        isAlive = false;
-                    }
-                    projectiles.Remove(projectile);
+                    //projectiles.Remove(projectile);
                 }
             }
 
@@ -195,6 +202,8 @@ namespace spacewar
             {
                 angleChange = 0.07f;
             }
+
+            unKillableTimer -= gameTime.ElapsedGameTime.Milliseconds;
         }
 
         public new void Draw(SpriteBatch spriteBatch)
@@ -231,7 +240,7 @@ namespace spacewar
             {
                 SpeedUp();
             }
-            else if(powerUps == PowerUps.shield) //Kollar om det finns en sköld eller ej
+            else if(powerUps == PowerUps.Shield) //Kollar om det finns en sköld eller ej
             {
                 shield = true;
             }
