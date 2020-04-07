@@ -24,9 +24,7 @@ namespace spacewar
         float angleChange = 0.04f;
         Vector2 origin;
         bool nextGenExperience = false;
-
         string config;
-
         //Vector2 mittpunkt = new Vector2(900, 540);
 
 
