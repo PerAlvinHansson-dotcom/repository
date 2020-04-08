@@ -18,7 +18,7 @@ namespace spacewar
 
         public bool harTryckt;
         public float speed = 5;
-        List<Projectile> projectiles;
+        public List<Projectile> projectiles;
         float angle;
         float angleChange = 0.04f;
         Vector2 origin;
@@ -29,6 +29,8 @@ namespace spacewar
 
         bool isAlive = true;
         bool shield = false;
+
+        int unKillableTimer = 500;
 
         Random rng = new Random();
 
@@ -50,16 +52,13 @@ namespace spacewar
             harTryckt = !harTryckt;
         }
 
-        public new void Update()
+        public new void Update(GameTime gameTime)
         {
             newstate = Keyboard.GetState();
 
-            if (!isAlive)
+            if (!isAlive) //Kollar om du dog förra updaten
             {
-                position = startPosition;
-                speed = startSpeed;
-
-                isAlive = true;
+                Respawn();
             }
 
             if (harTryckt == false)
@@ -199,35 +198,42 @@ namespace spacewar
                 }
 
             }
+
             foreach (Projectile projectile in projectiles.ToArray())
             {
                 projectile.Update();
 
-                /*if (Intersects(projectile.Hitbox))
+                if (Intersects(projectile.Hitbox))//Kollar igenom alla skotten för att se om de har träffat något //Hugo
                 {
-                    if (shield)
+                    if (unKillableTimer < 0)
                     {
-                        shield = false;
+                        if (shield)//Kollar om det finns en sköld eller inte
+                        {
+                            shield = false;
+                        }
+                        else
+                        {
+                            isAlive = false;
+                        }
+                        unKillableTimer = 500;
                     }
-                    else
-                    {
-                        isAlive = false;
-                    }
-                    projectiles.Remove(projectile);
-                }*/
+                    //projectiles.Remove(projectile);
+                }
             }
 
             oldstate = newstate;
 
-            if (speed > 10)
+            if (speed > 10) //Hugo
             {
                 speed = 10;
             }
 
-            if (angleChange > 0.07f)
+            if (angleChange > 0.07f) //Hugo
             {
                 angleChange = 0.07f;
             }
+
+            unKillableTimer -= gameTime.ElapsedGameTime.Milliseconds;
         }
 
         public new void Draw(SpriteBatch spriteBatch)
@@ -239,12 +245,12 @@ namespace spacewar
             }
         }
 
-        public bool Intersects(Rectangle otherObject)
+        public bool Intersects(Rectangle otherObject) //Kollar om man krockar
         {
             return Hitbox.Intersects(otherObject);
         }
 
-        public PowerUps RandomPower() //Skickar en random powerup när man skapar/krockar med en powerup
+        public PowerUps RandomPower() //Skickar en random power när man skapar en powerup //Hugo
         {
             Array values = Enum.GetValues(typeof(PowerUps));
             PowerUps randomPower = (PowerUps)values.GetValue(rng.Next(values.Length));
@@ -252,22 +258,30 @@ namespace spacewar
             return randomPower;
         }
 
-        public void SpeedUp() //Mer speed
+        public void SpeedUp() //Större hastighet //Hugo
         {
             speed *= 1.15f;
             angleChange *= 1.02f;
         }
 
-        public void PowerUp(PowerUps powerUps)
+        public void PowerUp(PowerUps powerUps) //Hugo
         {
             if(powerUps == PowerUps.Speed)
             {
                 SpeedUp();
             }
-            else if(powerUps == PowerUps.shield) //Kollar om det finns en sköld eller ej
+            else if(powerUps == PowerUps.Shield) //Kollar om det finns en sköld eller ej
             {
                 shield = true;
             }
+        }
+
+        public void Respawn() //Nollställer dina stats och skickar tillbacka dig till start positionen //Hugo
+        {
+            position = startPosition;
+            speed = startSpeed;
+
+            isAlive = true;
         }
     }
 }
