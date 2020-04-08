@@ -184,6 +184,7 @@ namespace spacewar
                 projectile.Update();
             }
 
+
             oldstate = newstate;
 
             if (speed > 10)
