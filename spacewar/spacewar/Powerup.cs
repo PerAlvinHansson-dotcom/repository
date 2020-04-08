@@ -8,17 +8,22 @@ using System.Threading.Tasks;
 
 namespace spacewar
 {
+    //Hugo
     enum PowerUps
     {
-        Speed
+        Speed,
+        Shield
     }
 
     class Powerup : GameObject
     {
+        public PowerUps pu;
+
         //Konstruktor
-        public Powerup(Texture2D texture, Vector2 startPosition) : base(texture, startPosition)
+        public Powerup(Texture2D texture, Vector2 startPosition, PowerUps powerUps) : base(texture, startPosition)
         {
-            velocity = new Vector2(2, 0);
+            velocity = new Vector2(0, 0);
+            pu = powerUps;
         }
     }
 }
