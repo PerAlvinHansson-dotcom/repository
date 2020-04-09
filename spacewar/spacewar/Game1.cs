@@ -23,6 +23,8 @@ namespace spacewar
 
         int randomPower;
 
+        Random rng = new Random();
+
         public static Texture2D projectileTexture1;
         public static Texture2D projectileTexture2;
         public static Texture2D projectileTexture3;
@@ -68,8 +70,8 @@ namespace spacewar
             
             powerupTexture = new List<Texture2D>();
 
-            powerupTexture.Add(Content.Load<Texture2D>("ball_1"));
-            powerupTexture.Add(Content.Load<Texture2D>("ball_2"));
+            powerupTexture.Add(Content.Load<Texture2D>("ball_1")); //Textur för speedup
+            powerupTexture.Add(Content.Load<Texture2D>("ball_2")); //Textur för sköld
 
             //printText = new Interface(Content.Load<SpriteFont>("sCORE:"));
 
@@ -109,14 +111,14 @@ namespace spacewar
 
             //int i = 0;
 
-            if (powerupTimer <= 0)
+            if (powerupTimer <= 0) //Spawnar en ny powerup när det har gått 5 sekunder //Hugo
             {
                 randomPower = (int)player.RandomPower();
-                powerups.Add(new Powerup(powerupTexture[randomPower], new Vector2(0, 0)));
-                powerupTimer = 1000;
+                powerups.Add(new Powerup(powerupTexture[randomPower], new Vector2(rng.Next(80, 1840), rng.Next(80, 1000)), (PowerUps)randomPower));
+                powerupTimer = 5000;
             }
 
-            foreach (Powerup power in powerups.ToArray())
+            foreach (Powerup power in powerups.ToArray()) //Går igenom varje power och kollar om spelaren åkt in i dem. //Hugo
             {
                 power.Update();
 

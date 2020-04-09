@@ -19,7 +19,7 @@ namespace spacewar
 
         public bool harTryckt;
         public float speed = 5;
-        List<Projectile> projectiles;
+        public List<Projectile> projectiles;
         float angle;
         float angleChange = 0.04f;
         Vector2 origin;
@@ -27,8 +27,12 @@ namespace spacewar
         string config;
         //Vector2 mittpunkt = new Vector2(900, 540);
 
+        Vector2 startPosition;
+        float startSpeed = 5;
+        bool isAlive = true;
+        bool shield = false;
+        int unKillableTimer = 500;
 
-       
         PowerUps powerups = new PowerUps();
 
         Random rng = new Random();
@@ -43,7 +47,7 @@ namespace spacewar
             projectiles = new List<Projectile>();
             origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
             this.config = config;
-
+            this.startPosition = startPosition;
         }
 
 
@@ -58,12 +62,15 @@ namespace spacewar
 
         }
 
-        public new void Update()
+        public new void Update(GameTime gameTime)
         {
             //double distanceX = Math.Pow(mittpunkt.X - position.X, 2); //Använd avståndet till mittpunkten på något sätt för att skapa dragkraft
             //double distanceY = Math.Pow(mittpunkt.Y - position.Y, 2);
 
-
+            if (!isAlive) //Kollar om du dog förra updaten
+            {
+                Respawn();
+            }
 
 
             newstate = Keyboard.GetState();
@@ -217,32 +224,38 @@ namespace spacewar
             {
                 projectile.Update();
 
-                /*if (Intersects(projectile.Hitbox))
+                if (Intersects(projectile.Hitbox))//Kollar igenom alla skotten för att se om de har träffat något //Hugo
                 {
-                    if (shield)
+                    if (unKillableTimer < 0)
                     {
-                        shield = false;
+                        if (shield)
+                        {
+                            shield = false;
+                        }
+                        else
+                        {
+                            isAlive = false;
+                        }
+                        unKillableTimer = 500;
                     }
-                    else
-                    {
-                        isAlive = false;
-                    }
-                    projectiles.Remove(projectile);
-                }*/
+                    //projectiles.Remove(projectile);
+                }
             }
 
 
             oldstate = newstate;
 
-            if (speed > 10)
+            if (speed > 10) //Hugo
             {
                 speed = 10;
             }
 
-            if (angleChange > 0.1f)
+            if (angleChange > 0.07f) //Hugo
             {
-                angleChange = 0.1f;
+                angleChange = 0.07f;
             }
+
+            unKillableTimer -= gameTime.ElapsedGameTime.Milliseconds;
         }
 
         public new void Draw(SpriteBatch spriteBatch)
@@ -254,12 +267,12 @@ namespace spacewar
             }
         }
 
-        public bool Intersects(Rectangle otherObject)
+        public bool Intersects(Rectangle otherObject) //Kollar om man krockar
         {
             return Hitbox.Intersects(otherObject);
         }
 
-        public PowerUps RandomPower()
+        public PowerUps RandomPower() //Skickar en random power när man skapar en powerup //Hugo
         {
             Array values = Enum.GetValues(typeof(PowerUps));
             PowerUps randomPower = (PowerUps)values.GetValue(rng.Next(values.Length));
@@ -267,18 +280,30 @@ namespace spacewar
             return randomPower;
         }
 
-        public void SpeedUp()
+        public void SpeedUp() //Större hastighet //Hugo
         {
             speed *= 1.15f;
-            angleChange *= 1.05f;
+            angleChange *= 1.02f;
         }
 
-        public void PowerUp(PowerUps powerUps)
+        public void PowerUp(PowerUps powerUps) //Hugo
         {
             if(powerups == PowerUps.Speed)
             {
                 SpeedUp();
             }
+            else if (powerUps == PowerUps.Shield) //Kollar om det finns en sköld eller ej
+            {
+                shield = true;
+            }
+        }
+
+        public void Respawn() //Nollställer dina stats och skickar tillbacka dig till start positionen //Hugo
+        {
+            position = startPosition;
+            speed = startSpeed;
+
+            isAlive = true;
         }
     }
 }
