@@ -91,6 +91,7 @@ namespace spacewar
             bool left = state.IsKeyUp(Keys.Left);
             bool up = state.IsKeyUp(Keys.Up);
             bool down = state.IsKeyUp(Keys.Down);
+            bool shoot = newstate.IsKeyUp(Keys.RightControl) && oldstate.IsKeyDown(Keys.RightControl);
 
             switch (config)
             {
@@ -102,6 +103,7 @@ namespace spacewar
                     left = state.IsKeyUp(Keys.A);
                     up = state.IsKeyUp(Keys.W);
                     down = state.IsKeyUp(Keys.S);
+                    shoot = newstate.IsKeyUp(Keys.LeftControl) && oldstate.IsKeyDown(Keys.LeftControl);
                     break;
             }
 
@@ -201,7 +203,7 @@ namespace spacewar
             }
 
             //skjut och skapa projectile
-            if (newstate.IsKeyDown(Keys.RightControl) && oldstate.IsKeyUp(Keys.RightControl))
+            if (shoot)
             {
                 if (weapon == "laser")
                 {
