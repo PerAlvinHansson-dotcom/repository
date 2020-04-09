@@ -228,7 +228,7 @@ namespace spacewar
                 {
                     if (unKillableTimer < 0)
                     {
-                        if (shield)
+                        if (shield)//Kollar om det finns en sköld eller inte
                         {
                             shield = false;
                         }
