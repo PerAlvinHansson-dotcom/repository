@@ -62,7 +62,7 @@ namespace spacewar
 
         }
 
-        public new void Update(GameTime gameTime)
+        public new void Update()
         {
             //double distanceX = Math.Pow(mittpunkt.X - position.X, 2); //Använd avståndet till mittpunkten på något sätt för att skapa dragkraft
             //double distanceY = Math.Pow(mittpunkt.Y - position.Y, 2);
@@ -257,7 +257,7 @@ namespace spacewar
                 angleChange = 0.07f;
             }
 
-            unKillableTimer -= gameTime.ElapsedGameTime.Milliseconds;
+            unKillableTimer -= 10;
         }
 
         public new void Draw(SpriteBatch spriteBatch)
