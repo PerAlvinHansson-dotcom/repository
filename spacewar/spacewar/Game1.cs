@@ -24,7 +24,9 @@ namespace spacewar
         int randomPower;
 
         public static Texture2D projectileTexture1;
-        
+        public static Texture2D projectileTexture2;
+        public static Texture2D projectileTexture3;
+
         //Interface interface1;
 
         public Game1()
@@ -79,6 +81,8 @@ namespace spacewar
 
 
             projectileTexture1 = Content.Load<Texture2D>("projectile_1");
+            projectileTexture2 = Content.Load<Texture2D>("projectile_2");
+            projectileTexture3 = Content.Load<Texture2D>("projectile_3");
         }
 
         /// <summary>

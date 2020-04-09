@@ -33,6 +33,11 @@ namespace spacewar
 
         Random rng = new Random();
 
+        //texturer och strings för vapen
+        Texture2D pTexture;
+        string weapon = "laser";
+
+
         public Player(Texture2D texture, Vector2 startPosition, string config) : base(texture, startPosition)
         {
             projectiles = new List<Projectile>();
@@ -174,15 +179,56 @@ namespace spacewar
                 alvinssmartametod();
             }
 
+            //välj vapen
+            if (newstate.IsKeyDown(Keys.Q) && oldstate.IsKeyUp(Keys.Q))
+            {
+                weapon = "laser";
+            }
+            if (newstate.IsKeyDown(Keys.W) && oldstate.IsKeyUp(Keys.W))
+            {
+                weapon = "coilgun";
+            }
+            if (newstate.IsKeyDown(Keys.E) && oldstate.IsKeyUp(Keys.E))
+            {
+                weapon = "plasma";
+            }
+
             //skjut och skapa projectile
             if (newstate.IsKeyDown(Keys.RightControl) && oldstate.IsKeyUp(Keys.RightControl))
             {
-                projectiles.Add(new Projectile(Game1.projectileTexture1, position, angle, origin, "laser"));
+                if (weapon == "laser")
+                {
+                    pTexture = Game1.projectileTexture1;
+                    projectiles.Add(new Projectile(pTexture, position, angle, origin, weapon));
+                }
+                if (weapon == "coilgun")
+                {
+                    pTexture = Game1.projectileTexture2;
+                    projectiles.Add(new Projectile(pTexture, position, angle, origin, weapon));
+                }
+                if (weapon == "plasma")
+                {
+                    pTexture = Game1.projectileTexture3;
+                    projectiles.Add(new Projectile(pTexture, position, angle, origin, weapon));
+                }
             }
 
             foreach (Projectile projectile in projectiles.ToArray())
             {
                 projectile.Update();
+
+                /*if (Intersects(projectile.Hitbox))
+                {
+                    if (shield)
+                    {
+                        shield = false;
+                    }
+                    else
+                    {
+                        isAlive = false;
+                    }
+                    projectiles.Remove(projectile);
+                }*/
             }
 
 
