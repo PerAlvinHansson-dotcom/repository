@@ -25,8 +25,8 @@ namespace spacewar
         Vector2 origin;
         bool nextGenExperience = false;
         string config;
-        //Vector2 mittpunkt = new Vector2(900, 540);
 
+        Vector2 mittpunkt = new Vector2(900, 540);
         Vector2 startPosition;
         float startSpeed = 5;
         bool isAlive = true;
@@ -64,8 +64,8 @@ namespace spacewar
 
         public new void Update()
         {
-            //double distanceX = Math.Pow(mittpunkt.X - position.X, 2); //Använd avståndet till mittpunkten på något sätt för att skapa dragkraft
-            //double distanceY = Math.Pow(mittpunkt.Y - position.Y, 2);
+            double distanceX = Math.Pow(mittpunkt.X - position.X, 2); //Använd avståndet till mittpunkten på något sätt för att skapa dragkraft
+            double distanceY = Math.Pow(mittpunkt.Y - position.Y, 2);
 
             if (!isAlive) //Kollar om du dog förra updaten
             {
@@ -77,8 +77,30 @@ namespace spacewar
 
             if (harTryckt == false)
             {
-                velocity.Y = 0;
+                       
                 velocity.X = 0;
+                velocity.Y = 0;
+
+            }
+
+            if (position.X < mittpunkt.X)
+            {
+                position.X += 0.75f;
+            }
+
+            if (position.X > mittpunkt.X)
+            {
+                position.X -= 0.75f;
+            }
+
+            if (position.Y < mittpunkt.Y)
+            {
+                position.Y += 0.75f;
+            }
+
+            if (position.Y > mittpunkt.Y)
+            {
+                position.Y -= 0.75f;
             }
 
 
