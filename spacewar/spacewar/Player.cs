@@ -36,7 +36,7 @@ namespace spacewar
         PowerUps powerups = new PowerUps();
 
         Random rng = new Random();
-
+        //OFIOJODJGIJGOIDJGOIJGODIJOGIJDOIJGOJDOGIJODIJGOIJDOGIJODIJGOIDJOIGJDOIJIGOID
         //texturer och strings för vapen
         Texture2D pTexture;
         string weapon = "laser";
