@@ -29,7 +29,7 @@ namespace spacewar
 
         Vector2 startPosition;
         float startSpeed = 5;
-        bool isAlive = true;
+        public bool isAlive = true;
         bool shield = false;
         int unKillableTimer = 500;
 
@@ -49,17 +49,10 @@ namespace spacewar
             this.config = config;
             this.startPosition = startPosition;
         }
-
-
        
         void alvinssmartametod()
         {
             harTryckt = !harTryckt;
-        }
-
-        public void IsAlive()
-        {
-
         }
 
         public new void Update(GameTime gameTime)
@@ -222,26 +215,9 @@ namespace spacewar
                 }
             }
 
-            foreach (Projectile projectile in projectiles.ToArray())
+            foreach (Projectile projectile in projectiles)
             {
                 projectile.Update();
-
-                if (Intersects(projectile.Hitbox))//Kollar igenom alla skotten för att se om de har träffat något //Hugo
-                {
-                    if (unKillableTimer < 0)
-                    {
-                        if (shield)//Kollar om det finns en sköld eller inte
-                        {
-                            shield = false;
-                        }
-                        else
-                        {
-                            isAlive = false;
-                        }
-                        unKillableTimer = 500;
-                    }
-                    //projectiles.Remove(projectile);
-                }
             }
 
 
@@ -269,11 +245,6 @@ namespace spacewar
             }
         }
 
-        public bool Intersects(Rectangle otherObject) //Kollar om man krockar
-        {
-            return Hitbox.Intersects(otherObject);
-        }
-
         public PowerUps RandomPower() //Skickar en random power när man skapar en powerup //Hugo
         {
             Array values = Enum.GetValues(typeof(PowerUps));
@@ -294,7 +265,7 @@ namespace spacewar
             {
                 SpeedUp();
             }
-            else if (powerUps == PowerUps.Shield) //Kollar om det finns en sköld eller ej
+            else if (powerUps == PowerUps.Shield)
             {
                 shield = true;
             }
@@ -306,6 +277,54 @@ namespace spacewar
             speed = startSpeed;
 
             isAlive = true;
+        }
+
+        public void CheckHit(Player enemy) //Hugo
+        {
+            foreach (Projectile projectile in projectiles.ToArray())
+            {
+                if (enemy.isAlive == true)
+                {
+                    if (projectile.Intersects(enemy.Hitbox))//Kollar igenom alla skotten för att se om de har träffat motståndaren
+                    {
+                        projectiles.Remove(projectile);
+                        if (!enemy.CheckIfKillable())
+                        {
+                            enemy.Respawn();
+                        }
+                        else
+                        {
+                            enemy.isAlive = true;
+                        }
+                    }
+                    else
+                    {
+                        enemy.isAlive = true;
+                    }
+                }
+            }
+        }
+
+        public bool CheckIfKillable() //Kollar om det går att död eller inte//Hugo
+        {
+            if (unKillableTimer < 0)
+            {
+                if (shield) //Kollar om det finns en sköld
+                {
+                    shield = false;
+                    unKillableTimer = 500;
+                    return true;
+                }
+                else
+                {
+                    unKillableTimer = 500;
+                    return false;
+                }
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

@@ -47,5 +47,10 @@ namespace spacewar
         {
             spriteBatch.Draw(texture, position, Color.White);
         }
+
+        public bool Intersects(Rectangle otherObject) //Kollar om man krockar
+        {
+            return Hitbox.Intersects(otherObject);
+        }
     }
 }

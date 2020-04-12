@@ -109,7 +109,8 @@ namespace spacewar
 
             // TODO: Add your update logic here
 
-            //int i = 0;
+            player.CheckHit(player2);
+            player2.CheckHit(player);
 
             if (powerupTimer <= 0) //Spawnar en ny powerup när det har gått 5 sekunder //Hugo
             {
@@ -135,12 +136,11 @@ namespace spacewar
                 }
             }
 
-            player.Update();
-            player2.Update();
-
+            player.Update(gameTime);
+            player2.Update(gameTime);
+            
             powerupTimer -= gameTime.ElapsedGameTime.Milliseconds;
             base.Update(gameTime);
-            
         }
 
         /// <summary>
