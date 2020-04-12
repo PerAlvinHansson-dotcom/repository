@@ -17,6 +17,9 @@ namespace spacewar
         KeyboardState oldstate;
         KeyboardState newstate;
 
+        //Jag har gjort styrning för player, gravitation och grejer relaterade till skärmen(bakgrundsbild och väggar). Jag har även utvecklat delar av game1 och större delen av gameobject. 
+        //Alvin
+
         public bool harTryckt;
         public float speed = 5;
         public List<Projectile> projectiles;
@@ -28,7 +31,7 @@ namespace spacewar
         float g = 0.75f;
 
 
-        Vector2 mittpunkt = new Vector2(900, 540);
+        Vector2 mittpunkt = new Vector2(960, 540);
         Vector2 startPosition;
         float startSpeed = 5;
         public bool isAlive = true;
@@ -52,10 +55,6 @@ namespace spacewar
             this.startPosition = startPosition;
         }
        
-        void alvinssmartametod()
-        {
-            harTryckt = !harTryckt;
-        }
 
         public new void Update(GameTime gameTime)
         {
@@ -159,7 +158,7 @@ namespace spacewar
                 float hastighetY = (float)Math.Sin((double)angle); 
                 velocity.X = hastighetX  * speed;
                 velocity.Y = hastighetY * speed;
-                alvinssmartametod();
+                harTryckt = !harTryckt;
             }
 
 
@@ -169,7 +168,7 @@ namespace spacewar
                 float hastighetY = -(float)Math.Sin((double)angle);
                 velocity.X = hastighetX  * speed;
                 velocity.Y = hastighetY * speed;
-                alvinssmartametod();
+                harTryckt = !harTryckt;
             }
 
             if (down && right)
@@ -179,7 +178,7 @@ namespace spacewar
                 velocity.X = hastighetX  * speed;
                 velocity.Y = hastighetY * speed;
                 angle -= angleChange;
-                alvinssmartametod();
+                harTryckt = !harTryckt;
             }
 
             if (down && left)
@@ -189,19 +188,19 @@ namespace spacewar
                 velocity.X = hastighetX  * speed;
                 velocity.Y = hastighetY * speed;
                 angle += angleChange;
-                alvinssmartametod();
+                harTryckt = !harTryckt;
             }
 
             if (right)
             {
                 angle -= angleChange;
-                alvinssmartametod();
+                harTryckt = !harTryckt;
             }
       
             if (left)
             {
                 angle += angleChange;
-                alvinssmartametod();
+                harTryckt = !harTryckt;
             }
 
             //välj vapen
