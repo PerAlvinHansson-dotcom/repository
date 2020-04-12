@@ -68,12 +68,11 @@ namespace spacewar
 
             newstate = Keyboard.GetState();
 
-            if (harTryckt == false)
-            {
-                       
+            if (harTryckt == false) //Så länge knappen inte är nedtryckt kommer inte player att ha någon hastighet bortsett från gravitationen
+                //Alvin
+            {                    
                 velocity.X = 0;
                 velocity.Y = 0;
-
             }
 
             if (position.X < mittpunkt.X)
@@ -110,7 +109,8 @@ namespace spacewar
 
             switch (config)
             {
-                case "a":
+                case "a": //Anges kontrollkonfigurationen "a" bryter den ur switch och använder standardkontrollerna.
+                    //Alvin
                     break;
 
                 case "b":
@@ -158,7 +158,8 @@ namespace spacewar
                 float hastighetY = (float)Math.Sin((double)angle); 
                 velocity.X = hastighetX  * speed;
                 velocity.Y = hastighetY * speed;
-                harTryckt = !harTryckt;
+                harTryckt = !harTryckt; //Anger att knappen har tryckts som sant, då booleanvärdet harTryckt återställs till false efter varje uppdatering.
+                //Alvin
             }
 
 
