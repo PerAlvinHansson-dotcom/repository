@@ -8,8 +8,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-
-
 namespace spacewar
 {
     class Projectile : GameObject
@@ -22,9 +20,10 @@ namespace spacewar
             pAngle = angle;
             pOrigin = origin;
 
+            //räknar ut var skottet ska vända sig
             Vector2 direction = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
             
-
+            //olika vapen
             if (weapon == "laser")
             {
                 velocity = direction * 20;
@@ -38,34 +37,10 @@ namespace spacewar
                 velocity = direction * 10;
             }
         }
-        /*
-        //projectile_1
-        public void Laser()
-        {
-
-        }
-        
-        //projectile_2
-        public void Coilgun()
-        {
-
-        }
-
-        //projectile_3
-        public void Plasma()
-        {
-
-        }
-        */
 
         public new void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, null, Color.White, pAngle, pOrigin, 1, SpriteEffects.None, 1);
         }
-
-        /*public void Update()
-        {
-
-        }*/
     }
 }
