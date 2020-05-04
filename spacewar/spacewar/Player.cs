@@ -84,6 +84,9 @@ namespace spacewar
             bool up = state.IsKeyUp(Keys.Up);
             bool down = state.IsKeyUp(Keys.Down);
             bool shoot = newstate.IsKeyUp(Keys.RightControl) && oldstate.IsKeyDown(Keys.RightControl);
+            bool change1 = newstate.IsKeyUp(Keys.U) && oldstate.IsKeyDown(Keys.U);
+            bool change2 = newstate.IsKeyUp(Keys.I) && oldstate.IsKeyDown(Keys.I);
+            bool change3 = newstate.IsKeyUp(Keys.O) && oldstate.IsKeyDown(Keys.O);
 
             switch (config)
             {
@@ -97,6 +100,9 @@ namespace spacewar
                     up = state.IsKeyUp(Keys.W);
                     down = state.IsKeyUp(Keys.S);
                     shoot = newstate.IsKeyUp(Keys.LeftControl) && oldstate.IsKeyDown(Keys.LeftControl);
+                    change1 = newstate.IsKeyUp(Keys.Z) && oldstate.IsKeyDown(Keys.Z);
+                    change2 = newstate.IsKeyUp(Keys.X) && oldstate.IsKeyDown(Keys.X);
+                    change3 = newstate.IsKeyUp(Keys.C) && oldstate.IsKeyDown(Keys.C);
                     break;
             }
 
@@ -182,21 +188,23 @@ namespace spacewar
                 harTryckt = !harTryckt;
             }
 
+            //sebastian
             //välj vapen
-            if (newstate.IsKeyDown(Keys.Q) && oldstate.IsKeyUp(Keys.Q))
+            if (change1)
             {
                 weapon = "laser";
             }
-            if (newstate.IsKeyDown(Keys.W) && oldstate.IsKeyUp(Keys.W))
+            if (change2)
             {
                 weapon = "coilgun";
             }
-            if (newstate.IsKeyDown(Keys.E) && oldstate.IsKeyUp(Keys.E))
+            if (change3)
             {
                 weapon = "plasma";
             }
 
-            //skjut och skapa projectile
+            //sebastian
+            //skjut och skapa projectile med valt vapen
             if (shoot)
             {
                 if (weapon == "laser")
