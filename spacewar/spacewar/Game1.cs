@@ -116,7 +116,7 @@ namespace spacewar
             {
                 randomPower = (int)player.RandomPower();
                 powerups.Add(new Powerup(powerupTexture[randomPower], new Vector2(rng.Next(80, 1840), rng.Next(80, 1000)), (PowerUps)randomPower));
-                powerupTimer = 5000;
+                powerupTimer = rng.Next(4500, 7000);
             }
 
             foreach (Powerup power in powerups.ToArray()) //Går igenom varje power och kollar om spelaren åkt in i dem. //Hugo
@@ -132,6 +132,11 @@ namespace spacewar
                 if (player2.Intersects(power.Hitbox))
                 {
                     player2.PowerUp((PowerUps)randomPower);
+                    powerups.Remove(power);
+                }
+
+                if (power.CheckIfInMiddle())
+                {
                     powerups.Remove(power);
                 }
             }

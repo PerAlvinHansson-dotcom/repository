@@ -21,17 +21,15 @@ namespace spacewar
         //Alvin
 
         public bool harTryckt;
-        public float speed = 5;
+        float speed = 5;
         public List<Projectile> projectiles;
         float angle;
         float angleChange = 0.04f;
         Vector2 origin;
         bool nextGenExperience = false;
         string config;
-        float g = 0.75f;
 
 
-        Vector2 mittpunkt = new Vector2(960, 540);
         Vector2 startPosition;
         float startSpeed = 5;
         public bool isAlive = true;
@@ -75,29 +73,9 @@ namespace spacewar
                 velocity.Y = 0;
             }
 
-            if (position.X < mittpunkt.X)
-            {
-                position.X += g;
-            }
 
-            if (position.X > mittpunkt.X)
-            {
-                position.X -= g;
-            }
-
-            if (position.Y < mittpunkt.Y)
-            {
-                position.Y += g;
-            }
-
-            if (position.Y > mittpunkt.Y)
-            {
-                position.Y -= g;
-            }
-
-
+            base.Update();
             harTryckt = false;
-            position += velocity;
 
             KeyboardState state = Keyboard.GetState();
 
