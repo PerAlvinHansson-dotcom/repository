@@ -19,10 +19,12 @@ namespace spacewar
     {
         public PowerUps pu;
 
+        Random rng = new Random();
+
         //Konstruktor
         public Powerup(Texture2D texture, Vector2 startPosition, PowerUps powerUps) : base(texture, startPosition)
         {
-            velocity = new Vector2(0, 0);
+            velocity = new Vector2((float)rng.NextDouble() * rng.Next(-4,4), (float)rng.NextDouble() * rng.Next(-4, 4));
             pu = powerUps;
         }
     }
