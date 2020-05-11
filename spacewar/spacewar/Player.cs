@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Threading;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 
 namespace spacewar
@@ -29,6 +31,7 @@ namespace spacewar
         bool nextGenExperience = false;
         string config;
         float g = 0.75f;
+        public int score = 0;
 
 
         Vector2 mittpunkt = new Vector2(960, 540);
@@ -56,7 +59,7 @@ namespace spacewar
         }
        
 
-        public new void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
           
 
@@ -322,6 +325,7 @@ namespace spacewar
                         if (!enemy.CheckIfKillable())
                         {
                             enemy.Respawn();
+                            score++;
                         }
                         else
                         {

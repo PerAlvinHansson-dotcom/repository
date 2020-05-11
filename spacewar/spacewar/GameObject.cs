@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace spacewar
 {
@@ -50,7 +52,7 @@ namespace spacewar
 
         public bool Intersects(Rectangle otherObject) //Kollar om man krockar
         {
-            return Hitbox.Intersects(otherObject);
+            return Hitbox.Intersects(otherObject);             
         }
     }
 }

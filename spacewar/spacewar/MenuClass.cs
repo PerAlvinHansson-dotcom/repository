@@ -9,9 +9,11 @@ using Microsoft.Xna.Framework.Input;
 
 namespace spacewar
 {
-    public class Menu : Game1
+    public class MenuClass : Game1
     {
-        
+
+
+
     }
 }
 

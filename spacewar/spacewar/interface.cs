@@ -9,11 +9,6 @@ using Microsoft.Xna.Framework.Content;
 
 namespace spacewar
 {
-    enum state {
-        menu,
-        game,
-        settings
-    }
     class Interface
     {
         private SpriteFont font;
@@ -27,6 +22,5 @@ namespace spacewar
         {
             spritebatch.DrawString(font, text, new Vector2(X, Y), Color.White);
         }
-        
     }
 }
