@@ -33,7 +33,7 @@ namespace spacewar
 
         Vector2 mittpunkt = new Vector2(960, 540);
         Vector2 startPosition;
-        float startSpeed = 5;
+        float startSpeed = 0;
         public bool isAlive = true;
         bool shield = false;
         int unKillableTimer = 500;
@@ -70,9 +70,10 @@ namespace spacewar
 
             if (harTryckt == false) //Så länge knappen inte är nedtryckt kommer inte player att ha någon hastighet bortsett från gravitationen
                 //Alvin
-            {                    
+            {
                 velocity.X = 0;
                 velocity.Y = 0;
+            
             }
 
             if (position.X < mittpunkt.X)
@@ -101,10 +102,10 @@ namespace spacewar
 
             KeyboardState state = Keyboard.GetState();
 
-            bool right = state.IsKeyUp(Keys.Right);
-            bool left = state.IsKeyUp(Keys.Left);
-            bool up = state.IsKeyUp(Keys.Up);
-            bool down = state.IsKeyUp(Keys.Down);
+            bool right = state.IsKeyDown(Keys.Right);
+            bool left = state.IsKeyDown(Keys.Left);
+            bool up = state.IsKeyDown(Keys.Up);
+            bool down = state.IsKeyDown(Keys.Down);
             bool shoot = newstate.IsKeyUp(Keys.RightControl) && oldstate.IsKeyDown(Keys.RightControl);
 
             switch (config)
@@ -114,10 +115,10 @@ namespace spacewar
                     break;
 
                 case "b":
-                    right = state.IsKeyUp(Keys.D);
-                    left = state.IsKeyUp(Keys.A);
-                    up = state.IsKeyUp(Keys.W);
-                    down = state.IsKeyUp(Keys.S);
+                    right = state.IsKeyDown(Keys.D);
+                    left = state.IsKeyDown(Keys.A);
+                    up = state.IsKeyDown(Keys.W);
+                    down = state.IsKeyDown(Keys.S);
                     shoot = newstate.IsKeyUp(Keys.LeftControl) && oldstate.IsKeyDown(Keys.LeftControl);
                     break;
             }
@@ -154,8 +155,8 @@ namespace spacewar
 
             if (down)
             {
-                float hastighetX = (float)Math.Cos((double)angle); //Konverterar till double och hittar cos för vinkeln, konvertar sedan till float för att det ska kunna tillämpas på velocity
-                float hastighetY = (float)Math.Sin((double)angle); 
+                float hastighetX = -(float)Math.Cos((double)angle); //Konverterar till double och hittar cos för vinkeln, konvertar sedan till float för att det ska kunna tillämpas på velocity
+                float hastighetY = -(float)Math.Sin((double)angle); 
                 velocity.X = hastighetX  * speed;
                 velocity.Y = hastighetY * speed;
                 harTryckt = !harTryckt; //Anger att knappen har tryckts som sant, då booleanvärdet harTryckt återställs till false efter varje uppdatering.
@@ -165,42 +166,42 @@ namespace spacewar
 
             if (up)
             {
-                float hastighetX  = -(float)Math.Cos((double)angle);
-                float hastighetY = -(float)Math.Sin((double)angle);
-                velocity.X = hastighetX  * speed;
-                velocity.Y = hastighetY * speed;
-                harTryckt = !harTryckt;
-            }
-
-            if (down && right)
-            {
                 float hastighetX  = (float)Math.Cos((double)angle);
                 float hastighetY = (float)Math.Sin((double)angle);
                 velocity.X = hastighetX  * speed;
                 velocity.Y = hastighetY * speed;
-                angle -= angleChange;
                 harTryckt = !harTryckt;
             }
 
-            if (down && left)
+            if (up && right)
             {
                 float hastighetX  = (float)Math.Cos((double)angle);
                 float hastighetY = (float)Math.Sin((double)angle);
                 velocity.X = hastighetX  * speed;
                 velocity.Y = hastighetY * speed;
                 angle += angleChange;
+                harTryckt = !harTryckt;
+            }
+
+            if (up && left)
+            {
+                float hastighetX  = (float)Math.Cos((double)angle);
+                float hastighetY = (float)Math.Sin((double)angle);
+                velocity.X = hastighetX  * speed;
+                velocity.Y = hastighetY * speed;
+                angle -= angleChange;
                 harTryckt = !harTryckt;
             }
 
             if (right)
             {
-                angle -= angleChange;
+                angle += angleChange;
                 harTryckt = !harTryckt;
             }
       
             if (left)
             {
-                angle += angleChange;
+                angle -= angleChange;
                 harTryckt = !harTryckt;
             }
 
