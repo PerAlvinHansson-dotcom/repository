@@ -21,17 +21,15 @@ namespace spacewar
         //Alvin
 
         public bool harTryckt;
-        public float speed = 5;
+        float speed = 5;
         public List<Projectile> projectiles;
         float angle;
         float angleChange = 0.04f;
         Vector2 origin;
         bool nextGenExperience = false;
         string config;
-        float g = 0.75f;
 
 
-        Vector2 mittpunkt = new Vector2(960, 540);
         Vector2 startPosition;
         float startSpeed = 0;
         public bool isAlive = true;
@@ -76,29 +74,9 @@ namespace spacewar
             
             }
 
-            if (position.X < mittpunkt.X)
-            {
-                position.X += g;
-            }
 
-            if (position.X > mittpunkt.X)
-            {
-                position.X -= g;
-            }
-
-            if (position.Y < mittpunkt.Y)
-            {
-                position.Y += g;
-            }
-
-            if (position.Y > mittpunkt.Y)
-            {
-                position.Y -= g;
-            }
-
-
+            base.Update();
             harTryckt = false;
-            position += velocity;
 
             KeyboardState state = Keyboard.GetState();
 
@@ -107,6 +85,9 @@ namespace spacewar
             bool up = state.IsKeyDown(Keys.Up);
             bool down = state.IsKeyDown(Keys.Down);
             bool shoot = newstate.IsKeyUp(Keys.RightControl) && oldstate.IsKeyDown(Keys.RightControl);
+            bool change1 = newstate.IsKeyUp(Keys.U) && oldstate.IsKeyDown(Keys.U);
+            bool change2 = newstate.IsKeyUp(Keys.I) && oldstate.IsKeyDown(Keys.I);
+            bool change3 = newstate.IsKeyUp(Keys.O) && oldstate.IsKeyDown(Keys.O);
 
             switch (config)
             {
@@ -120,6 +101,9 @@ namespace spacewar
                     up = state.IsKeyDown(Keys.W);
                     down = state.IsKeyDown(Keys.S);
                     shoot = newstate.IsKeyUp(Keys.LeftControl) && oldstate.IsKeyDown(Keys.LeftControl);
+                    change1 = newstate.IsKeyUp(Keys.Z) && oldstate.IsKeyDown(Keys.Z);
+                    change2 = newstate.IsKeyUp(Keys.X) && oldstate.IsKeyDown(Keys.X);
+                    change3 = newstate.IsKeyUp(Keys.C) && oldstate.IsKeyDown(Keys.C);
                     break;
             }
 
@@ -205,21 +189,23 @@ namespace spacewar
                 harTryckt = !harTryckt;
             }
 
+            //sebastian
             //välj vapen
-            if (newstate.IsKeyDown(Keys.Q) && oldstate.IsKeyUp(Keys.Q))
+            if (change1)
             {
                 weapon = "laser";
             }
-            if (newstate.IsKeyDown(Keys.W) && oldstate.IsKeyUp(Keys.W))
+            if (change2)
             {
                 weapon = "coilgun";
             }
-            if (newstate.IsKeyDown(Keys.E) && oldstate.IsKeyUp(Keys.E))
+            if (change3)
             {
                 weapon = "plasma";
             }
 
-            //skjut och skapa projectile
+            //sebastian
+            //skjut och skapa projectile med valt vapen
             if (shoot)
             {
                 if (weapon == "laser")

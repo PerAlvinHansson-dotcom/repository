@@ -15,6 +15,9 @@ namespace spacewar
         protected Texture2D texture;
         protected Vector2 position, velocity;
 
+        Vector2 mittpunkt = new Vector2(960, 540);
+        float g = 0.75f;
+
         public Rectangle Hitbox
         {
             get
@@ -41,6 +44,26 @@ namespace spacewar
         public void Update()
         {
             position += velocity;
+
+            if (position.X < mittpunkt.X)
+            {
+                position.X += g;
+            }
+
+            if (position.X > mittpunkt.X)
+            {
+                position.X -= g;
+            }
+
+            if (position.Y < mittpunkt.Y)
+            {
+                position.Y += g;
+            }
+
+            if (position.Y > mittpunkt.Y)
+            {
+                position.Y -= g;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -51,6 +74,21 @@ namespace spacewar
         public bool Intersects(Rectangle otherObject) //Kollar om man krockar
         {
             return Hitbox.Intersects(otherObject);
+        }
+
+        public bool CheckIfInMiddle()
+        {
+            if (position.X == mittpunkt.X && position.Y == mittpunkt.Y)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public void G()
+        {
+            g = 
         }
     }
 }
