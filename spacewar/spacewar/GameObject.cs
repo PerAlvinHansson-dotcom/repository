@@ -86,9 +86,7 @@ namespace spacewar
                 return false;
         }
 
-        public void G()
-        {
-            g = 
-        }
+    
+
     }
 }

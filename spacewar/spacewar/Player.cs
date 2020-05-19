@@ -69,8 +69,8 @@ namespace spacewar
             if (harTryckt == false) //Så länge knappen inte är nedtryckt kommer inte player att ha någon hastighet bortsett från gravitationen
                 //Alvin
             {
-                velocity.X = 0;
-                velocity.Y = 0;
+                velocity.X *= 0.98f;
+                velocity.Y *= 0.98f;
             
             }
 
@@ -181,12 +181,17 @@ namespace spacewar
             {
                 angle += angleChange;
                 harTryckt = !harTryckt;
+                velocity.X *= 0.99f;
+                velocity.Y *= 0.99f;
+
             }
       
             if (left)
             {
                 angle -= angleChange;
                 harTryckt = !harTryckt;
+                velocity.X *= 0.99f;
+                velocity.Y *= 0.90f;
             }
 
             //sebastian

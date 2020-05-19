@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -23,6 +24,8 @@ namespace spacewar
 
         int randomPower;
 
+        List<SoundEffect> soundeffects;
+
         Random rng = new Random();
 
         public static Texture2D projectileTexture1;
@@ -37,6 +40,7 @@ namespace spacewar
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
+            soundeffects = new List<SoundEffect>();
         }
 
         /// <summary>
@@ -85,6 +89,10 @@ namespace spacewar
             projectileTexture1 = Content.Load<Texture2D>("projectile_1");
             projectileTexture2 = Content.Load<Texture2D>("projectile_2");
             projectileTexture3 = Content.Load<Texture2D>("projectile_3");
+
+
+            soundeffects.Add(Content.Load<SoundEffect>("spacetheme"));
+            soundeffects[0].Play();
         }
 
         /// <summary>
