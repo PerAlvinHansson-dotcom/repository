@@ -13,10 +13,10 @@ namespace spacewar
     {
        
         protected Texture2D texture;
-        protected Vector2 position, velocity;
+        public Vector2 position, velocity;
 
-        Vector2 mittpunkt = new Vector2(960, 540);
-        float g = 0.75f;
+        Vector2 centerpoint = new Vector2(960, 540);
+        public float g = 0.5f;
 
         public Rectangle Hitbox
         {
@@ -44,26 +44,60 @@ namespace spacewar
         public void Update()
         {
             position += velocity;
+            
+            float distanceToCenter = (float)Math.Sqrt(Math.Pow((position.X - centerpoint.X), 2) + Math.Pow((position.Y - centerpoint.Y), 2));
 
-            if (position.X < mittpunkt.X)
+            float proportion = 1 * (1 - (distanceToCenter * 0.001f));
+
+            float gravity = g * proportion;
+
+
+            if (position.X < centerpoint.X)
             {
-                position.X += g;
+                position.X += gravity;
             }
 
-            if (position.X > mittpunkt.X)
+            if (position.X > centerpoint.X)
             {
-                position.X -= g;
+                position.X -= gravity;
             }
 
-            if (position.Y < mittpunkt.Y)
+            if (position.Y < centerpoint.Y)
             {
-                position.Y += g;
+                position.Y += gravity;
             }
 
-            if (position.Y > mittpunkt.Y)
+            if (position.Y > centerpoint.Y)
             {
-                position.Y -= g;
+                position.Y -= gravity;
             }
+
+
+            if(position.Y > centerpoint.Y && position.X > centerpoint.X)
+            {
+                position.Y -= gravity;
+                position.X -= gravity;
+            }
+
+            if(position.Y < centerpoint.Y && position.X > centerpoint.X)
+            {
+                position.X -= gravity;
+                position.Y += gravity;
+            }
+
+            if (position.Y < centerpoint.Y && position.X < centerpoint.X)
+            {
+                position.Y += gravity;
+                position.X += gravity;
+            }
+
+            if (position.Y > centerpoint.Y && position.X < centerpoint.X)
+            {
+                position.X += gravity;
+                position.Y -= gravity;
+            }
+
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -78,7 +112,7 @@ namespace spacewar
 
         public bool CheckIfInMiddle()
         {
-            if (position.X == mittpunkt.X && position.Y == mittpunkt.Y)
+            if (position.X == centerpoint.X && position.Y == centerpoint.Y)
             {
                 return true;
             }

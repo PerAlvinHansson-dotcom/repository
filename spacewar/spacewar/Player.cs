@@ -21,7 +21,7 @@ namespace spacewar
         //Alvin
 
         public bool harTryckt;
-        float speed = 5;
+        float speed = 3;
         public List<Projectile> projectiles;
         float angle;
         float angleChange = 0.04f;
@@ -31,7 +31,7 @@ namespace spacewar
 
 
         Vector2 startPosition;
-        float startSpeed = 0;
+        float startSpeed = 3;
         public bool isAlive = true;
         bool shield = false;
         int unKillableTimer = 500;
