@@ -16,6 +16,7 @@ namespace spacewar
         Texture2D background;
 
         Player player, player2;
+        
         string placeholder = "";
 
         private int victorytimer;
@@ -31,6 +32,25 @@ namespace spacewar
                 if (victorytimer < 0)
                 {
                     victorytimer = 0;
+                }
+            }
+        }
+
+        bool hasWon = false;
+        private int exittimer;
+        int Exittimer
+        {
+            get
+            {
+                return exittimer;
+            }
+
+            set
+            {
+                exittimer = value;
+                if (exittimer < 0)
+                {
+                    Environment.Exit(0);
                 }
             }
         }
@@ -94,6 +114,7 @@ namespace spacewar
             spriteBatch = new SpriteBatch(GraphicsDevice);
             player = new Player(Content.Load<Texture2D>("ship"), new Vector2(100, 220), "a");
             player2 = new Player(Content.Load<Texture2D>("ship2"), new Vector2(1820, 220), "b");
+            player2.angle += (float)Math.PI;
             background = Content.Load<Texture2D>("space2");
             // TODO: use this.Content to load your game content here
             powerups = new List<Powerup>();
@@ -235,52 +256,76 @@ namespace spacewar
                 printText.Print(placeholder, spriteBatch, 750, 200);
             }
 
+            if(hasWon == true)
+            {
+                Exittimer -= 10;
+            }
+
+
             if (player.wins == 3)
             {
-                placeholder = "Player one won the game!";
+                placeholder = "Player one won the game! Thanks for playing.";
+                Victorytimer = 2250;
+                soundeffects[5].Play();
                 player.wins = 0;
                 player2.wins = 0;
                 player.points = 0;
                 player2.points = 0;
-                Victorytimer = 2250;
-                soundeffects[5].Play();
+                Exittimer = 2300;
+                hasWon = true;
             }
 
             if (player2.wins == 3)
             {
-                placeholder = "Player two won the game!";
+                placeholder = "Player two won the game! Thanks for playing.";
+                Victorytimer = 2250;
+                soundeffects[5].Play();
                 player.wins = 0;
                 player2.wins = 0;
                 player.points = 0;
                 player2.points = 0;
-                Victorytimer = 2250;
-                soundeffects[5].Play();
+                Exittimer = 2300;
+                hasWon = true;
             }
+
 
             if (player.points == 10)
             {
                 placeholder = "Player one won the round!";
-                player.points = 0;
-                player2.points = 0;
+
                 Victorytimer = 2250;
-                soundeffects[4].Play();
                 player.wins += 1;
                 player.Respawn();
                 player2.Respawn();
+
+                if(player.wins < 3)
+                {
+                    soundeffects[4].Play();
+                }
+
+                player.points = 0;
+                player2.points = 0;
             }
 
             if(player2.points == 10)
             {
                 placeholder = "Player two won the round!";
-                player.points = 0;
-                player2.points = 0;
-                Victorytimer = 2250;
-                soundeffects[4].Play();
+                Victorytimer = 2250;         
                 player2.wins += 1;
                 player.Respawn();
                 player2.Respawn();
 
+                if (player2.wins < 3)
+                {
+                    soundeffects[4].Play();
+                }
+
+                player.points = 0;
+                player2.points = 0;
             }
+
+
+
 
 
 

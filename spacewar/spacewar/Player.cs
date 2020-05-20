@@ -23,7 +23,7 @@ namespace spacewar
         public bool harTryckt;
         float speed = 3;
         public List<Projectile> projectiles;
-        float angle;
+        public float angle;
         float angleChange = 0.04f;
         Vector2 origin;
         bool nextGenExperience = false;
@@ -271,6 +271,9 @@ namespace spacewar
                 projectile.Draw(spriteBatch);
             }
         }
+
+
+
 
         public PowerUps RandomPower() //Skickar en random power när man skapar en powerup //Hugo
         {
