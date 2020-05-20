@@ -30,6 +30,7 @@ namespace spacewar
         string config;
 
         public int points;
+        public int wins;
 
 
         Vector2 startPosition;
@@ -224,13 +225,20 @@ namespace spacewar
                 }
                 if (weapon == "coilgun")
                 {
-                    pTexture = Game1.projectileTexture2;
+                    pTexture = Game1.projectileTexture2;                  
                     projectiles.Add(new Projectile(pTexture, position, angle, origin, weapon));
+
+                    Game1.soundeffects[2].Play();
+
                 }
                 if (weapon == "plasma")
                 {
+                    
                     pTexture = Game1.projectileTexture3;
                     projectiles.Add(new Projectile(pTexture, position, angle, origin, weapon));
+
+                    Game1.soundeffects[3].Play();
+
                 }
             }
 
@@ -309,7 +317,8 @@ namespace spacewar
                         projectiles.Remove(projectile);
                         if (!enemy.CheckIfKillable())
                         {
-                            Game1.soundeffects[2].Play();
+                            Random r = new Random();
+                            Game1.explosions[r.Next(0, 4)].Play();
                             points += 1;
                             enemy.Respawn();
                         }

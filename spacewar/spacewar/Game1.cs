@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace spacewar
 {
@@ -15,7 +16,24 @@ namespace spacewar
         Texture2D background;
 
         Player player, player2;
-        int pointsP1, pointsP2;
+        string placeholder = "";
+
+        private int victorytimer;
+        int Victorytimer {
+            get
+            {
+                return victorytimer;
+            }
+
+            set
+            {
+                victorytimer = value;
+                if (victorytimer < 0)
+                {
+                    victorytimer = 0;
+                }
+            }
+        }
 
         Interface printText;
         GraphicsDeviceManager graphics;
@@ -32,6 +50,7 @@ namespace spacewar
         Random rng = new Random();
 
         public static List<SoundEffect> soundeffects;
+        public static List<SoundEffect> explosions;
 
         public static Texture2D projectileTexture1;
         public static Texture2D projectileTexture2;
@@ -45,7 +64,6 @@ namespace spacewar
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
-            soundeffects = new List<SoundEffect>();
         }
 
         /// <summary>
@@ -69,10 +87,13 @@ namespace spacewar
         /// </summary>
         protected override void LoadContent()
         {
+            soundeffects = new List<SoundEffect>();
+            explosions = new List<SoundEffect>();
+
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            player = new Player(Content.Load<Texture2D>("ship"), new Vector2(100, 150), "a");
-            player2 = new Player(Content.Load<Texture2D>("ship"), new Vector2(1820, 150), "b");
+            player = new Player(Content.Load<Texture2D>("ship"), new Vector2(100, 220), "a");
+            player2 = new Player(Content.Load<Texture2D>("ship2"), new Vector2(1820, 220), "b");
             background = Content.Load<Texture2D>("space2");
             // TODO: use this.Content to load your game content here
             powerups = new List<Powerup>();
@@ -90,9 +111,6 @@ namespace spacewar
             printText = new Interface(Content.Load<SpriteFont>("Font1"));
 
 
-
-
-
             projectileTexture1 = Content.Load<Texture2D>("projectile_1");
             projectileTexture2 = Content.Load<Texture2D>("projectile_2");
             projectileTexture3 = Content.Load<Texture2D>("projectile_3");
@@ -100,7 +118,15 @@ namespace spacewar
 
             soundeffects.Add(Content.Load<SoundEffect>("spacetheme"));
             soundeffects.Add(Content.Load<SoundEffect>("lasershoot"));
-            soundeffects.Add(Content.Load<SoundEffect>("explosion"));
+            soundeffects.Add(Content.Load<SoundEffect>("coilgun"));
+            soundeffects.Add(Content.Load<SoundEffect>("plasma"));
+            soundeffects.Add(Content.Load<SoundEffect>("victory"));
+            soundeffects.Add(Content.Load<SoundEffect>("victory2"));
+
+            explosions.Add(Content.Load<SoundEffect>("explosion"));
+            explosions.Add(Content.Load<SoundEffect>("explosion2"));
+            explosions.Add(Content.Load<SoundEffect>("explosion3"));
+            explosions.Add(Content.Load<SoundEffect>("explosion4"));
 
             soundeffects[0].Play();
         }
@@ -130,9 +156,10 @@ namespace spacewar
             player.CheckHit(player2);
             player2.CheckHit(player);
 
-            pointsP1 = player.points;
-            pointsP2 = player2.points;
 
+
+
+            
            
 
             if (powerupTimer <= 0) //Spawnar en ny powerup när det har gått 5 sekunder //Hugo
@@ -193,8 +220,70 @@ namespace spacewar
             player2.Draw(spriteBatch);
             base.Draw(gameTime);
 
-            printText.Print("Score: " + pointsP1, spriteBatch, 2, 2);
-            printText.Print("Score: " + pointsP2, spriteBatch, 1730, 2);
+            printText.Print("Score: " + player.points, spriteBatch, 2, 2);
+            printText.Print("Wins: " + player.wins, spriteBatch, 2, 50);
+
+            printText.Print("Score: " + player2.points, spriteBatch, 1730, 2);
+            printText.Print("Wins: " + player2.wins, spriteBatch, 1730, 50);
+
+           
+
+            Victorytimer -= 10;
+
+            if(Victorytimer > 0)
+            {
+                printText.Print(placeholder, spriteBatch, 750, 200);
+            }
+
+            if (player.wins == 3)
+            {
+                placeholder = "Player one won the game!";
+                player.wins = 0;
+                player2.wins = 0;
+                player.points = 0;
+                player2.points = 0;
+                Victorytimer = 2250;
+                soundeffects[5].Play();
+            }
+
+            if (player2.wins == 3)
+            {
+                placeholder = "Player two won the game!";
+                player.wins = 0;
+                player2.wins = 0;
+                player.points = 0;
+                player2.points = 0;
+                Victorytimer = 2250;
+                soundeffects[5].Play();
+            }
+
+            if (player.points == 10)
+            {
+                placeholder = "Player one won the round!";
+                player.points = 0;
+                player2.points = 0;
+                Victorytimer = 2250;
+                soundeffects[4].Play();
+                player.wins += 1;
+                player.Respawn();
+                player2.Respawn();
+            }
+
+            if(player2.points == 10)
+            {
+                placeholder = "Player two won the round!";
+                player.points = 0;
+                player2.points = 0;
+                Victorytimer = 2250;
+                soundeffects[4].Play();
+                player2.wins += 1;
+                player.Respawn();
+                player2.Respawn();
+
+            }
+
+
+
             //printText.Print("Score:", spriteBatch, 2, 2);
             spriteBatch.End();
         }
