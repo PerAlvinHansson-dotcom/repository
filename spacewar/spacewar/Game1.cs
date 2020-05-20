@@ -13,11 +13,13 @@ namespace spacewar
     /// </summary>
     public class Game1 : Game
     {
+        //Var tionde score(träff på motståndaren) ger en vinst, och efter tre vinster så vinner man spelet /Alvin
+
         Texture2D background;
 
         Player player, player2;
         
-        string placeholder = "";
+        string placeholder = ""; //Placeholder som fylls in av olika händelser /Alvin
 
         private int victorytimer;
         int Victorytimer {
@@ -36,7 +38,7 @@ namespace spacewar
             }
         }
 
-        bool hasWon = false;
+        bool hasWon = false; //Timern exittimer initieras när en spelare har vunnit tre gånger, efter det stängs spelet /Alvin
         private int exittimer;
         int Exittimer
         {
@@ -69,8 +71,8 @@ namespace spacewar
 
         Random rng = new Random();
 
-        public static List<SoundEffect> soundeffects;
-        public static List<SoundEffect> explosions;
+        public static List<SoundEffect> soundeffects; 
+        public static List<SoundEffect> explosions; //Lista med explosionsljud, används slumpmässigt när en spelare dör /Alvin
 
         public static Texture2D projectileTexture1;
         public static Texture2D projectileTexture2;
@@ -114,7 +116,7 @@ namespace spacewar
             spriteBatch = new SpriteBatch(GraphicsDevice);
             player = new Player(Content.Load<Texture2D>("ship"), new Vector2(100, 220), "a");
             player2 = new Player(Content.Load<Texture2D>("ship2"), new Vector2(1820, 220), "b");
-            player2.angle += (float)Math.PI;
+            player2.angle += (float)Math.PI; //Roterar player2 med pi radianer(180 grader) Alvin
             background = Content.Load<Texture2D>("space2");
             // TODO: use this.Content to load your game content here
             powerups = new List<Powerup>();
@@ -149,7 +151,7 @@ namespace spacewar
             explosions.Add(Content.Load<SoundEffect>("explosion3"));
             explosions.Add(Content.Load<SoundEffect>("explosion4"));
 
-            soundeffects[0].Play();
+            soundeffects[0].Play(); //Spelar ljudeffekten vid första positionen i listan, alltså bakgrundsmusiken /Alvin
         }
 
         /// <summary>
@@ -241,7 +243,7 @@ namespace spacewar
             player2.Draw(spriteBatch);
             base.Draw(gameTime);
 
-            printText.Print("Score: " + player.points, spriteBatch, 2, 2);
+            printText.Print("Score: " + player.points, spriteBatch, 2, 2); //Skriver ut och uppdaterar score och annan information genom en metod i interface /Alvin
             printText.Print("Wins: " + player.wins, spriteBatch, 2, 50);
 
             printText.Print("Score: " + player2.points, spriteBatch, 1730, 2);
@@ -251,9 +253,9 @@ namespace spacewar
 
             Victorytimer -= 10;
 
-            if(Victorytimer > 0)
+            if(Victorytimer > 0) //Så länge timern varar syns information i placeholder /Alvin
             {
-                printText.Print(placeholder, spriteBatch, 750, 200);
+                printText.Print(placeholder, spriteBatch, 750, 200); 
             }
 
             if(hasWon == true)
@@ -264,22 +266,24 @@ namespace spacewar
 
             if (player.wins == 3)
             {
-                placeholder = "Player one won the game! Thanks for playing.";
+                placeholder = "Player one won the game! \n\nThanks for playing.";
                 Victorytimer = 2250;
                 soundeffects[5].Play();
+
                 player.wins = 0;
                 player2.wins = 0;
                 player.points = 0;
                 player2.points = 0;
-                Exittimer = 2300;
+                Exittimer = 2300; //Sätter exittimern, samma sak med victorytimer /Alvin
                 hasWon = true;
             }
 
             if (player2.wins == 3)
             {
-                placeholder = "Player two won the game! Thanks for playing.";
+                placeholder = "Player two won the game! \n\nThanks for playing.";
                 Victorytimer = 2250;
                 soundeffects[5].Play();
+
                 player.wins = 0;
                 player2.wins = 0;
                 player.points = 0;
@@ -298,7 +302,7 @@ namespace spacewar
                 player.Respawn();
                 player2.Respawn();
 
-                if(player.wins < 3)
+                if(player.wins < 3) //Ljudeffekten för 10 points spelas inte tillsammans med win-ljudeffekten efter att man har vunnit tre gånger /Alvin
                 {
                     soundeffects[4].Play();
                 }
