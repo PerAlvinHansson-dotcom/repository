@@ -29,6 +29,8 @@ namespace spacewar
         bool nextGenExperience = false;
         string config;
 
+        public int points;
+
 
         Vector2 startPosition;
         float startSpeed = 3;
@@ -217,6 +219,8 @@ namespace spacewar
                 {
                     pTexture = Game1.projectileTexture1;
                     projectiles.Add(new Projectile(pTexture, position, angle, origin, weapon));
+
+                    Game1.soundeffects[1].Play();
                 }
                 if (weapon == "coilgun")
                 {
@@ -305,6 +309,8 @@ namespace spacewar
                         projectiles.Remove(projectile);
                         if (!enemy.CheckIfKillable())
                         {
+                            Game1.soundeffects[2].Play();
+                            points += 1;
                             enemy.Respawn();
                         }
                         else

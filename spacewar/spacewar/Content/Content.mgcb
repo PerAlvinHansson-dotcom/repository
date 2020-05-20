@@ -122,3 +122,15 @@
 /processorParam:Quality=Best
 /build:spacetheme.mp3
 
+#begin lasershoot.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:lasershoot.mp3
+
+#begin explosion.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:explosion.mp3
+

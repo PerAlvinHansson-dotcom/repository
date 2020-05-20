@@ -13,7 +13,10 @@ namespace spacewar
     public class Game1 : Game
     {
         Texture2D background;
+
         Player player, player2;
+        int pointsP1, pointsP2;
+
         Interface printText;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -24,9 +27,11 @@ namespace spacewar
 
         int randomPower;
 
-        List<SoundEffect> soundeffects;
+    
 
         Random rng = new Random();
+
+        public static List<SoundEffect> soundeffects;
 
         public static Texture2D projectileTexture1;
         public static Texture2D projectileTexture2;
@@ -86,12 +91,17 @@ namespace spacewar
 
 
 
+
+
             projectileTexture1 = Content.Load<Texture2D>("projectile_1");
             projectileTexture2 = Content.Load<Texture2D>("projectile_2");
             projectileTexture3 = Content.Load<Texture2D>("projectile_3");
 
 
             soundeffects.Add(Content.Load<SoundEffect>("spacetheme"));
+            soundeffects.Add(Content.Load<SoundEffect>("lasershoot"));
+            soundeffects.Add(Content.Load<SoundEffect>("explosion"));
+
             soundeffects[0].Play();
         }
 
@@ -119,6 +129,11 @@ namespace spacewar
 
             player.CheckHit(player2);
             player2.CheckHit(player);
+
+            pointsP1 = player.points;
+            pointsP2 = player2.points;
+
+           
 
             if (powerupTimer <= 0) //Spawnar en ny powerup när det har gått 5 sekunder //Hugo
             {
@@ -177,8 +192,13 @@ namespace spacewar
             player.Draw(spriteBatch);
             player2.Draw(spriteBatch);
             base.Draw(gameTime);
-            printText.Print("Score:", spriteBatch, 2, 2);
+
+            printText.Print("Score: " + pointsP1, spriteBatch, 2, 2);
+            printText.Print("Score: " + pointsP2, spriteBatch, 1730, 2);
+            //printText.Print("Score:", spriteBatch, 2, 2);
             spriteBatch.End();
         }
+
+
     }
 }
